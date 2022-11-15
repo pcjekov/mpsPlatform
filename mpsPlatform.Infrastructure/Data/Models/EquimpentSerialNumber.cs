@@ -27,7 +27,6 @@ namespace mpsPlatform.Infrastructure.Data.Models
         [StringLength(20)]
         public string SerialNumber { get; set; } = null!;
 
-        [Required]
         [ForeignKey(nameof(Model))]
         public int ModelId { get; set; }
         public Model Model { get; set; } = null!;
