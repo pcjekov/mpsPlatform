@@ -1,12 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Diagnostics.Contracts;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace mpsPlatform.Infrastructure.Data.Models
 {
@@ -27,9 +21,10 @@ namespace mpsPlatform.Infrastructure.Data.Models
         [StringLength(20)]
         public string SerialNumber { get; set; } = null!;
 
-        [ForeignKey(nameof(Model))]
-        public int ModelId { get; set; }
-        public Model Model { get; set; } = null!;
+        [Required]
+        [ForeignKey(nameof(ЕquipmentModel))]
+        public int ЕquipmentModelId { get; set; }
+        public ЕquipmentModel ЕquipmentModel { get; set; } = null!;
 
         [Required]
         [ForeignKey(nameof(ЕquipmentLocation))]

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace mpsPlatform.Infrastructure.Data.Models
 {
-    public class SparepartModel
+    public class SparePartModel
     {
         [Required]
         [ForeignKey(nameof(SparePart))]
@@ -11,8 +11,8 @@ namespace mpsPlatform.Infrastructure.Data.Models
         public SparePart SparePart { get; set; } = null!;
 
         [Required]
-        [ForeignKey(nameof(Model))]
-        public int ModelId { get; set; }
-        public Model Model { get; set; } = null!;
+        [ForeignKey(nameof(ЕquipmentModel))]
+        public int ЕquipmentModelId { get; set; }
+        public ЕquipmentModel ЕquipmentModel { get; set; } = null!;
     }
 }

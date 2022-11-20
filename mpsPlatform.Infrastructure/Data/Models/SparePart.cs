@@ -11,7 +11,7 @@ namespace mpsPlatform.Infrastructure.Data.Models
     {
         public SparePart()
         {
-            SparepartsModels = new List<SparepartModel>();
+            SparePartsModels = new List<SparePartModel>();
         }
 
         [Key]
@@ -28,6 +28,6 @@ namespace mpsPlatform.Infrastructure.Data.Models
         [Required]
         public int Resource { get; set; }
 
-        public List<SparepartModel> SparepartsModels { get; set; }
+        public List<SparePartModel> SparePartsModels { get; set; }
     }
 }

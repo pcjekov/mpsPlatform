@@ -7,7 +7,7 @@ namespace mpsPlatform.Infrastructure.Data.Models
     {
         public Мanifacturer()
         {
-            Models = new List<Model>();
+            ЕquipmentModels = new List<ЕquipmentModel>();
         }
 
         [Key]
@@ -17,6 +17,6 @@ namespace mpsPlatform.Infrastructure.Data.Models
         [StringLength(20)]
         public string Name { get; set; } = null!;
 
-        public List<Model> Models { get; set; }
+        public List<ЕquipmentModel> ЕquipmentModels { get; set; }
     }
 }

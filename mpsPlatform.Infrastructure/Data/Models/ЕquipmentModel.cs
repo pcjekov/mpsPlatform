@@ -4,12 +4,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace mpsPlatform.Infrastructure.Data.Models
 {
-    public class Model
+    public class ЕquipmentModel
     {
-        public Model()
+        public ЕquipmentModel()
         {
-            EquimpentsSerialNumbers = new List<EquimpentSerialNumber>();
-            SparepartsModels = new List<SparepartModel>();
+           EquimpentSerialNumbers = new List<EquimpentSerialNumber>();
+            SparePartsModels = new List<SparePartModel>();
         }
 
         [Key]
@@ -34,8 +34,8 @@ namespace mpsPlatform.Infrastructure.Data.Models
         public int МanifacturerId { get; set; }
         public Мanifacturer Мanifacturer { get; set; } = null!;
 
-        public List<EquimpentSerialNumber> EquimpentsSerialNumbers{ get; set; }
+       public List<EquimpentSerialNumber> EquimpentSerialNumbers{ get; set; }
 
-        public List<SparepartModel> SparepartsModels { get; set; }
+        public List<SparePartModel> SparePartsModels { get; set; }
     }
 }
