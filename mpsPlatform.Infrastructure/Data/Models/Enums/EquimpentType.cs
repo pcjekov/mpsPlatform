@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace mpsPlatform.Infrastructure.Data
+namespace mpsPlatform.Infrastructure.Data.Models.Enums
 {
-    internal class Мanufacturer
+    public enum EquimpentType
     {
+        BW,Col
     }
 }

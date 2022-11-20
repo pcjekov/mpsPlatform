@@ -1,8 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using mpsPlatform.Infrastructure.Data;
 using System.Linq.Expressions;
 
-namespace HouseRentingSystem.Infrastructure.Data.Common
+namespace mpsPlatform.Infrastructure.Data.Common
 {
     /// <summary>
     /// Implementation of repository access methods

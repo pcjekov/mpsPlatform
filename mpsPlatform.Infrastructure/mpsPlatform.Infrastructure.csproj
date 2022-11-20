@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Folder Include="Data\Common\" />
+    <Folder Include="Data\Configuration\" />
   </ItemGroup>
 
   <ItemGroup>
