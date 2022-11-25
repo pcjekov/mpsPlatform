@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace mpsPlatform.Infrastructure.Data.Models.Enums
 {
-    public enum EquimpentType
+    public enum EquipmentType
     {
         BW,Col
     }

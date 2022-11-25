@@ -19,8 +19,8 @@ namespace mpsPlatform.Infrastructure.Data.Configuration
             var user = new IdentityUser()
             {
                 Id = "dea12856-c198-4129-b3f3-b893d8395082",
-                UserName = "admin@mpsPlatform.com",
-                NormalizedUserName = "admin@mpsplatform.com",
+                UserName = "admin",
+                NormalizedUserName = "ADMIN",
                 Email = "admin@mpsPlatform.com",
                 NormalizedEmail = "admin@mpsplatform.com"
             };

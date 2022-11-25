@@ -12,9 +12,9 @@ namespace mpsPlatform.Infrastructure.Data.Models
         public int CurrentCounter { get; set; }
 
         [Required]
-        [ForeignKey(nameof(EquimpentSerialNumber))]
-        public int EquimpentSerialNumberId { get; set; }
-        public EquimpentSerialNumber EquimpentSerialNumber { get; set; } = null!;
+        [ForeignKey(nameof(SerialNumber))]
+        public int SerialNumberId { get; set; }
+        public SerialNumber SerialNumber { get; set; } = null!;
 
         [Required]
         [ForeignKey(nameof(DateOfEntry))]

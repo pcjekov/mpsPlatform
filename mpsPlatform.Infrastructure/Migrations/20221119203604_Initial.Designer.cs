@@ -12,7 +12,7 @@ using mpsPlatform.Infrastructure.Data;
 namespace mpsPlatform.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221115204053_Initial")]
+    [Migration("20221119203604_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -145,15 +145,15 @@ namespace mpsPlatform.Infrastructure.Migrations
                         {
                             Id = "dea12856-c198-4129-b3f3-b893d8395082",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5cbac67a-d789-479c-8368-9e878a4c4c7f",
+                            ConcurrencyStamp = "4cc0c97c-96ac-4788-8911-4e166878b579",
                             Email = "admin@mpsPlatform.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@mpsplatform.com",
                             NormalizedUserName = "admin@mpsplatform.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAECg1FoRAyl6PL6FCheDcsaMUWSfYESVGq39aTG6cy8G7q4dP9Vy7ZJvkve82eCChCg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEF6cOBmwT4gTLflHrK0OGryULRj5Z6D4uT/no3KGKQNOFLc4Xqpfio1o5d9yYRBblQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0b3dec3a-369b-4d6a-88de-2ad76293e715",
+                            SecurityStamp = "c334512d-c8e1-46db-bca2-d9677a089346",
                             TwoFactorEnabled = false,
                             UserName = "admin@mpsPlatform.com"
                         });
@@ -244,29 +244,6 @@ namespace mpsPlatform.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.ЕquipmentLocation", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Location")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CustomerId");
-
-                    b.ToTable("ЕquipmentLocations");
-                });
-
             modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.ЕquipmentModel", b =>
                 {
                     b.Property<int>("Id")
@@ -290,6 +267,11 @@ namespace mpsPlatform.Infrastructure.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("PartNumber")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
                     b.Property<int>("МanifacturerId")
                         .HasColumnType("int");
 
@@ -298,6 +280,62 @@ namespace mpsPlatform.Infrastructure.Migrations
                     b.HasIndex("МanifacturerId");
 
                     b.ToTable("ЕquipmentModels");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            EquimpentType = 0,
+                            MaxPaperType = 0,
+                            Name = "VersaLink B610dn",
+                            PartNumber = "B610V_DN",
+                            МanifacturerId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            EquimpentType = 0,
+                            MaxPaperType = 0,
+                            Name = "VersaLink B405",
+                            PartNumber = "B405V_DN",
+                            МanifacturerId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            EquimpentType = 1,
+                            MaxPaperType = 1,
+                            Name = "AltaLink C8035",
+                            PartNumber = "C8001V_T_097S04830",
+                            МanifacturerId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            EquimpentType = 1,
+                            MaxPaperType = 1,
+                            Name = "AltaLink C8155",
+                            PartNumber = "C8102V_F_097S05045",
+                            МanifacturerId = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            EquimpentType = 0,
+                            MaxPaperType = 0,
+                            Name = "LaserJet M609dn",
+                            PartNumber = "K0Q21A",
+                            МanifacturerId = 2
+                        },
+                        new
+                        {
+                            Id = 6,
+                            EquimpentType = 0,
+                            MaxPaperType = 0,
+                            Name = "VersaLink B605",
+                            PartNumber = "B605V_DN",
+                            МanifacturerId = 1
+                        });
                 });
 
             modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.Мanifacturer", b =>
@@ -316,6 +354,18 @@ namespace mpsPlatform.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Мanifacturers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Xerox"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "HP"
+                        });
                 });
 
             modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.Contract", b =>
@@ -339,6 +389,26 @@ namespace mpsPlatform.Infrastructure.Migrations
                     b.HasIndex("CustomerId");
 
                     b.ToTable("Contract");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ContractNumber = "CTR-003263/ 2022",
+                            CustomerId = 2
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ContractNumber = "CTR-004452/ 2021",
+                            CustomerId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ContractNumber = "CTR-002526/ 2019",
+                            CustomerId = 2
+                        });
                 });
 
             modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.CounterColorA3", b =>
@@ -355,16 +425,32 @@ namespace mpsPlatform.Infrastructure.Migrations
                     b.Property<int>("DateOfEntryId")
                         .HasColumnType("int");
 
-                    b.Property<int>("EquimpentSerialNumberId")
+                    b.Property<int>("SerialNumberId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("DateOfEntryId");
 
-                    b.HasIndex("EquimpentSerialNumberId");
+                    b.HasIndex("SerialNumberId");
 
                     b.ToTable("CountersColorA3");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CurrentCounter = 4670,
+                            DateOfEntryId = 1,
+                            SerialNumberId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CurrentCounter = 390,
+                            DateOfEntryId = 1,
+                            SerialNumberId = 2
+                        });
                 });
 
             modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.CounterColorA4", b =>
@@ -381,16 +467,32 @@ namespace mpsPlatform.Infrastructure.Migrations
                     b.Property<int>("DateOfEntryId")
                         .HasColumnType("int");
 
-                    b.Property<int>("EquimpentSerialNumberId")
+                    b.Property<int>("SerialNumberId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("DateOfEntryId");
 
-                    b.HasIndex("EquimpentSerialNumberId");
+                    b.HasIndex("SerialNumberId");
 
                     b.ToTable("CountersColorA4");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CurrentCounter = 336300,
+                            DateOfEntryId = 1,
+                            SerialNumberId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CurrentCounter = 35800,
+                            DateOfEntryId = 1,
+                            SerialNumberId = 2
+                        });
                 });
 
             modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.CounterMonochromeA3", b =>
@@ -407,16 +509,32 @@ namespace mpsPlatform.Infrastructure.Migrations
                     b.Property<int>("DateOfEntryId")
                         .HasColumnType("int");
 
-                    b.Property<int>("EquimpentSerialNumberId")
+                    b.Property<int>("SerialNumberId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("DateOfEntryId");
 
-                    b.HasIndex("EquimpentSerialNumberId");
+                    b.HasIndex("SerialNumberId");
 
                     b.ToTable("CountersMonochromeA3");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CurrentCounter = 900,
+                            DateOfEntryId = 1,
+                            SerialNumberId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CurrentCounter = 10,
+                            DateOfEntryId = 1,
+                            SerialNumberId = 2
+                        });
                 });
 
             modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.CounterMonochromeA4", b =>
@@ -433,16 +551,60 @@ namespace mpsPlatform.Infrastructure.Migrations
                     b.Property<int>("DateOfEntryId")
                         .HasColumnType("int");
 
-                    b.Property<int>("EquimpentSerialNumberId")
+                    b.Property<int>("SerialNumberId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("DateOfEntryId");
 
-                    b.HasIndex("EquimpentSerialNumberId");
+                    b.HasIndex("SerialNumberId");
 
                     b.ToTable("CountersMonochromeA4");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CurrentCounter = 95000,
+                            DateOfEntryId = 1,
+                            SerialNumberId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CurrentCounter = 4700,
+                            DateOfEntryId = 1,
+                            SerialNumberId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CurrentCounter = 58400,
+                            DateOfEntryId = 1,
+                            SerialNumberId = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CurrentCounter = 94700,
+                            DateOfEntryId = 2,
+                            SerialNumberId = 4
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CurrentCounter = 232100,
+                            DateOfEntryId = 2,
+                            SerialNumberId = 5
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CurrentCounter = 137200,
+                            DateOfEntryId = 3,
+                            SerialNumberId = 6
+                        });
                 });
 
             modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.Customer", b =>
@@ -461,6 +623,18 @@ namespace mpsPlatform.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Customers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Metal Construct PLC"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Ring Ltd"
+                        });
                 });
 
             modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.DateOfEntry", b =>
@@ -477,55 +651,28 @@ namespace mpsPlatform.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("DatesOfEntrys");
-                });
 
-            modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.EquimpentSerialNumber", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("ContractId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("PriceColorA3")
-                        .HasPrecision(10, 8)
-                        .HasColumnType("decimal(10,8)");
-
-                    b.Property<decimal>("PriceColorA4")
-                        .HasPrecision(10, 8)
-                        .HasColumnType("decimal(10,8)");
-
-                    b.Property<decimal>("PriceMonochromeA3")
-                        .HasPrecision(10, 8)
-                        .HasColumnType("decimal(10,8)");
-
-                    b.Property<decimal>("PriceMonochromeA4")
-                        .HasPrecision(10, 8)
-                        .HasColumnType("decimal(10,8)");
-
-                    b.Property<string>("SerialNumber")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<int>("ЕquipmentLocationId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ЕquipmentModelId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ContractId");
-
-                    b.HasIndex("ЕquipmentLocationId");
-
-                    b.HasIndex("ЕquipmentModelId");
-
-                    b.ToTable("EquimpentSerialNumbers");
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Date = new DateTime(2022, 8, 11, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Date = new DateTime(2022, 9, 11, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Date = new DateTime(2022, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Date = new DateTime(2022, 7, 11, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.InstallerMan", b =>
@@ -544,6 +691,190 @@ namespace mpsPlatform.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("InstallersPeople");
+                });
+
+            modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.Location", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("EquimpentLocation")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("Locations");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CustomerId = 2,
+                            EquimpentLocation = "Managers"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CustomerId = 2,
+                            EquimpentLocation = "PPR"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CustomerId = 2,
+                            EquimpentLocation = "Med.center"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CustomerId = 2,
+                            EquimpentLocation = "Capture"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CustomerId = 2,
+                            EquimpentLocation = "Handwork"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CustomerId = 1,
+                            EquimpentLocation = "Админ.сграда ет.1"
+                        });
+                });
+
+            modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.SerialNumber", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("ContractId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LocationId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("PriceColorA3")
+                        .HasPrecision(10, 8)
+                        .HasColumnType("decimal(10,8)");
+
+                    b.Property<decimal>("PriceColorA4")
+                        .HasPrecision(10, 8)
+                        .HasColumnType("decimal(10,8)");
+
+                    b.Property<decimal>("PriceMonochromeA3")
+                        .HasPrecision(10, 8)
+                        .HasColumnType("decimal(10,8)");
+
+                    b.Property<decimal>("PriceMonochromeA4")
+                        .HasPrecision(10, 8)
+                        .HasColumnType("decimal(10,8)");
+
+                    b.Property<int>("ЕquipmentModelId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ЕquipmentSerialNumber")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ContractId");
+
+                    b.HasIndex("LocationId");
+
+                    b.HasIndex("ЕquipmentModelId");
+
+                    b.ToTable("SerialNumbers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ContractId = 1,
+                            LocationId = 1,
+                            PriceColorA3 = 0.1722m,
+                            PriceColorA4 = 0.0818m,
+                            PriceMonochromeA3 = 0.00216m,
+                            PriceMonochromeA4 = 0.00108m,
+                            ЕquipmentModelId = 3,
+                            ЕquipmentSerialNumber = "3717622919"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ContractId = 1,
+                            LocationId = 2,
+                            PriceColorA3 = 0.1722m,
+                            PriceColorA4 = 0.0818m,
+                            PriceMonochromeA3 = 0.00216m,
+                            PriceMonochromeA4 = 0.00108m,
+                            ЕquipmentModelId = 4,
+                            ЕquipmentSerialNumber = "3774403743"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ContractId = 1,
+                            LocationId = 3,
+                            PriceColorA3 = 0m,
+                            PriceColorA4 = 0m,
+                            PriceMonochromeA3 = 0m,
+                            PriceMonochromeA4 = 0.0189m,
+                            ЕquipmentModelId = 2,
+                            ЕquipmentSerialNumber = "3719467309"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ContractId = 3,
+                            LocationId = 4,
+                            PriceColorA3 = 0m,
+                            PriceColorA4 = 0m,
+                            PriceMonochromeA3 = 0m,
+                            PriceMonochromeA4 = 0.02m,
+                            ЕquipmentModelId = 5,
+                            ЕquipmentSerialNumber = "CNBVK9317X"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ContractId = 3,
+                            LocationId = 6,
+                            PriceColorA3 = 0m,
+                            PriceColorA4 = 0m,
+                            PriceMonochromeA3 = 0m,
+                            PriceMonochromeA4 = 0.02m,
+                            ЕquipmentModelId = 1,
+                            ЕquipmentSerialNumber = "3394734267"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ContractId = 2,
+                            LocationId = 6,
+                            PriceColorA3 = 0m,
+                            PriceColorA4 = 0m,
+                            PriceMonochromeA3 = 0m,
+                            PriceMonochromeA4 = 0.018m,
+                            ЕquipmentModelId = 6,
+                            ЕquipmentSerialNumber = "3394976619"
+                        });
                 });
 
             modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.SparePart", b =>
@@ -570,6 +901,106 @@ namespace mpsPlatform.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("SpareParts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "cartridge",
+                            PartNumber = "CF237YC",
+                            Resource = 37000
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Maintenance Kit",
+                            PartNumber = "L0H25A",
+                            Resource = 225000
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "black cartridge",
+                            PartNumber = "006R01701",
+                            Resource = 26000
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "cyan cartridge",
+                            PartNumber = "006R01702",
+                            Resource = 15000
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "magenta cartridge",
+                            PartNumber = "006R01703",
+                            Resource = 15000
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "yellow cartridge",
+                            PartNumber = "006R01704",
+                            Resource = 15000
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "drum",
+                            PartNumber = "013R00662",
+                            Resource = 126000
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "black cartridge",
+                            PartNumber = "006R01758",
+                            Resource = 59000
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Name = "cyan cartridge",
+                            PartNumber = "006R01759",
+                            Resource = 28000
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Name = "magenta cartridge",
+                            PartNumber = "006R01760",
+                            Resource = 28000
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Name = "yellow cartridge",
+                            PartNumber = "006R01761",
+                            Resource = 28000
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Name = "drum",
+                            PartNumber = "013R00681",
+                            Resource = 180000
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Name = "cartridge",
+                            PartNumber = "106R03585",
+                            Resource = 37000
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Name = "drum",
+                            PartNumber = "101R00554",
+                            Resource = 24000
+                        });
                 });
 
             modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.SparePartModel", b =>
@@ -585,6 +1016,78 @@ namespace mpsPlatform.Infrastructure.Migrations
                     b.HasIndex("ЕquipmentModelId");
 
                     b.ToTable("SparePartsModels");
+
+                    b.HasData(
+                        new
+                        {
+                            SparePartId = 1,
+                            ЕquipmentModelId = 5
+                        },
+                        new
+                        {
+                            SparePartId = 2,
+                            ЕquipmentModelId = 5
+                        },
+                        new
+                        {
+                            SparePartId = 3,
+                            ЕquipmentModelId = 3
+                        },
+                        new
+                        {
+                            SparePartId = 4,
+                            ЕquipmentModelId = 3
+                        },
+                        new
+                        {
+                            SparePartId = 5,
+                            ЕquipmentModelId = 3
+                        },
+                        new
+                        {
+                            SparePartId = 6,
+                            ЕquipmentModelId = 3
+                        },
+                        new
+                        {
+                            SparePartId = 7,
+                            ЕquipmentModelId = 3
+                        },
+                        new
+                        {
+                            SparePartId = 8,
+                            ЕquipmentModelId = 4
+                        },
+                        new
+                        {
+                            SparePartId = 9,
+                            ЕquipmentModelId = 4
+                        },
+                        new
+                        {
+                            SparePartId = 10,
+                            ЕquipmentModelId = 4
+                        },
+                        new
+                        {
+                            SparePartId = 11,
+                            ЕquipmentModelId = 4
+                        },
+                        new
+                        {
+                            SparePartId = 12,
+                            ЕquipmentModelId = 4
+                        },
+                        new
+                        {
+                            SparePartId = 13,
+                            ЕquipmentModelId = 2
+                        },
+                        new
+                        {
+                            SparePartId = 14,
+                            ЕquipmentModelId = 2
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -638,17 +1141,6 @@ namespace mpsPlatform.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.ЕquipmentLocation", b =>
-                {
-                    b.HasOne("mpsPlatform.Infrastructure.Data.Models.Customer", "Customer")
-                        .WithMany("ЕquipmentLocations")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Customer");
-                });
-
             modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.ЕquipmentModel", b =>
                 {
                     b.HasOne("mpsPlatform.Infrastructure.Data.Models.Мanifacturer", "Мanifacturer")
@@ -679,15 +1171,15 @@ namespace mpsPlatform.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("mpsPlatform.Infrastructure.Data.Models.EquimpentSerialNumber", "EquimpentSerialNumber")
+                    b.HasOne("mpsPlatform.Infrastructure.Data.Models.SerialNumber", "SerialNumber")
                         .WithMany("CountersColorA3")
-                        .HasForeignKey("EquimpentSerialNumberId")
+                        .HasForeignKey("SerialNumberId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("DateOfEntry");
 
-                    b.Navigation("EquimpentSerialNumber");
+                    b.Navigation("SerialNumber");
                 });
 
             modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.CounterColorA4", b =>
@@ -698,15 +1190,15 @@ namespace mpsPlatform.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("mpsPlatform.Infrastructure.Data.Models.EquimpentSerialNumber", "EquimpentSerialNumber")
+                    b.HasOne("mpsPlatform.Infrastructure.Data.Models.SerialNumber", "SerialNumber")
                         .WithMany("CountersColorA4")
-                        .HasForeignKey("EquimpentSerialNumberId")
+                        .HasForeignKey("SerialNumberId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("DateOfEntry");
 
-                    b.Navigation("EquimpentSerialNumber");
+                    b.Navigation("SerialNumber");
                 });
 
             modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.CounterMonochromeA3", b =>
@@ -717,15 +1209,15 @@ namespace mpsPlatform.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("mpsPlatform.Infrastructure.Data.Models.EquimpentSerialNumber", "EquimpentSerialNumber")
+                    b.HasOne("mpsPlatform.Infrastructure.Data.Models.SerialNumber", "SerialNumber")
                         .WithMany("CountersMonochromeA3")
-                        .HasForeignKey("EquimpentSerialNumberId")
+                        .HasForeignKey("SerialNumberId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("DateOfEntry");
 
-                    b.Navigation("EquimpentSerialNumber");
+                    b.Navigation("SerialNumber");
                 });
 
             modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.CounterMonochromeA4", b =>
@@ -736,40 +1228,51 @@ namespace mpsPlatform.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("mpsPlatform.Infrastructure.Data.Models.EquimpentSerialNumber", "EquimpentSerialNumber")
+                    b.HasOne("mpsPlatform.Infrastructure.Data.Models.SerialNumber", "SerialNumber")
                         .WithMany("CountersMonochromeA4")
-                        .HasForeignKey("EquimpentSerialNumberId")
+                        .HasForeignKey("SerialNumberId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("DateOfEntry");
 
-                    b.Navigation("EquimpentSerialNumber");
+                    b.Navigation("SerialNumber");
                 });
 
-            modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.EquimpentSerialNumber", b =>
+            modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.Location", b =>
+                {
+                    b.HasOne("mpsPlatform.Infrastructure.Data.Models.Customer", "Customer")
+                        .WithMany("Locations")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.SerialNumber", b =>
                 {
                     b.HasOne("mpsPlatform.Infrastructure.Data.Models.Contract", "Contract")
-                        .WithMany("EquimpentSerialNumbers")
+                        .WithMany("SerialNumbers")
                         .HasForeignKey("ContractId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("mpsPlatform.Infrastructure.Data.Models.ЕquipmentLocation", "ЕquipmentLocation")
-                        .WithMany("EquimpentSerialNumbers")
-                        .HasForeignKey("ЕquipmentLocationId")
+                    b.HasOne("mpsPlatform.Infrastructure.Data.Models.Location", "Location")
+                        .WithMany("SerialNumbers")
+                        .HasForeignKey("LocationId")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.HasOne("mpsPlatform.Infrastructure.Data.Models.ЕquipmentModel", "ЕquipmentModel")
-                        .WithMany("EquimpentSerialNumbers")
+                        .WithMany("SerialNumbers")
                         .HasForeignKey("ЕquipmentModelId")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.Navigation("Contract");
 
-                    b.Navigation("ЕquipmentLocation");
+                    b.Navigation("Location");
 
                     b.Navigation("ЕquipmentModel");
                 });
@@ -793,14 +1296,9 @@ namespace mpsPlatform.Infrastructure.Migrations
                     b.Navigation("ЕquipmentModel");
                 });
 
-            modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.ЕquipmentLocation", b =>
-                {
-                    b.Navigation("EquimpentSerialNumbers");
-                });
-
             modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.ЕquipmentModel", b =>
                 {
-                    b.Navigation("EquimpentSerialNumbers");
+                    b.Navigation("SerialNumbers");
 
                     b.Navigation("SparePartsModels");
                 });
@@ -812,14 +1310,14 @@ namespace mpsPlatform.Infrastructure.Migrations
 
             modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.Contract", b =>
                 {
-                    b.Navigation("EquimpentSerialNumbers");
+                    b.Navigation("SerialNumbers");
                 });
 
             modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.Customer", b =>
                 {
                     b.Navigation("Contracts");
 
-                    b.Navigation("ЕquipmentLocations");
+                    b.Navigation("Locations");
                 });
 
             modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.DateOfEntry", b =>
@@ -833,7 +1331,12 @@ namespace mpsPlatform.Infrastructure.Migrations
                     b.Navigation("CountersMonochromeA4");
                 });
 
-            modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.EquimpentSerialNumber", b =>
+            modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.Location", b =>
+                {
+                    b.Navigation("SerialNumbers");
+                });
+
+            modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.SerialNumber", b =>
                 {
                     b.Navigation("CountersColorA3");
 

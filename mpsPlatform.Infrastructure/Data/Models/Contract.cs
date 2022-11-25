@@ -7,7 +7,7 @@ namespace mpsPlatform.Infrastructure.Data.Models
     {
         public Contract()
         {
-            EquimpentSerialNumbers = new List<EquimpentSerialNumber>();
+            SerialNumbers = new List<SerialNumber>();
         }
 
         [Key]
@@ -22,6 +22,6 @@ namespace mpsPlatform.Infrastructure.Data.Models
         public int CustomerId { get; set; }
         public Customer Customer { get; set; } = null!;
 
-        public List<EquimpentSerialNumber> EquimpentSerialNumbers { get; set; }
+        public List<SerialNumber> SerialNumbers { get; set; }
     }
 }

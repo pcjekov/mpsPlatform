@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace mpsPlatform.Infrastructure.Data.Models
 {
-    public class EquimpentSerialNumber
+    public class SerialNumber
     {
-        public EquimpentSerialNumber()
+        public SerialNumber()
         {
             CountersMonochromeA4 = new List<CounterMonochromeA4>();
             CountersMonochromeA3 = new List<CounterMonochromeA3>();
@@ -19,7 +19,7 @@ namespace mpsPlatform.Infrastructure.Data.Models
 
         [Required]
         [StringLength(20)]
-        public string SerialNumber { get; set; } = null!;
+        public string ЕquipmentSerialNumber { get; set; } = null!;
 
         [Required]
         [ForeignKey(nameof(ЕquipmentModel))]
@@ -27,9 +27,9 @@ namespace mpsPlatform.Infrastructure.Data.Models
         public ЕquipmentModel ЕquipmentModel { get; set; } = null!;
 
         [Required]
-        [ForeignKey(nameof(ЕquipmentLocation))]
-        public int ЕquipmentLocationId { get; set; }
-        public ЕquipmentLocation ЕquipmentLocation { get; set; } = null!;
+        [ForeignKey(nameof(Location))]
+        public int LocationId { get; set; }
+        public Location Location { get; set; } = null!;
 
         [Required]
         [ForeignKey(nameof(Contract))]
