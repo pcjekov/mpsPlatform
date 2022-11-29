@@ -1,4 +1,7 @@
-﻿namespace mpsPlatform.Models
+﻿using mpsPlatform.Core.Models;
+using System.Collections.Generic;
+
+namespace mpsPlatform.Models
 {
     public class EquipmentServiceModel
     {
@@ -16,9 +19,12 @@
         
         public string SerialNumber { get; set; } = null!;
 
-        public string Date { get; set; } = null!;
+        public IEnumerable<EquipmentServiceCounterDateModel> CountersDates { get; set; }
+        //public DateTime Date { get; set; }
+        ////public string Date { get; set; } = null!;
 
-        public int CurrentCounter { get; set; }
+
+        //public int CurrentCounter { get; set; }
 
     }
 }

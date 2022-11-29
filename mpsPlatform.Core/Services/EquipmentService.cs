@@ -4,6 +4,8 @@ using mpsPlatform.Core.Models;
 using mpsPlatform.Infrastructure.Data.Common;
 using mpsPlatform.Infrastructure.Data.Models;
 using mpsPlatform.Models;
+using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 
 namespace mpsPlatform.Core.Services
 {
@@ -14,9 +16,7 @@ namespace mpsPlatform.Core.Services
         public EquipmentService(IRepository _repo)
         {
             repo = _repo;
-        }
-
-       
+        }       
 
         public async Task<IEnumerable<EquipmentServiceModel>> GetAllAsync(
                                                             string? manifacturer,
@@ -33,6 +33,12 @@ namespace mpsPlatform.Core.Services
                              Where(x => x.ЕquipmentModel.Мanifacturer.Name == manifacturer);
             }
 
+            if (string.IsNullOrEmpty(equipmentModel) == false)
+            {
+                equipments = equipments.
+                             Where(x => x.ЕquipmentModel.Name == equipmentModel);
+            }
+
             if (string.IsNullOrEmpty(customerName) == false)
             {
                 equipments = equipments.
@@ -45,6 +51,12 @@ namespace mpsPlatform.Core.Services
                              Where(x => x.Contract.ContractNumber == contractNumber);
             }
 
+            // DateTime lastDate = await equipments
+            //                         .Select(x => x.);
+
+            //DateTime matchetDate = DateTime.Parse("2022-09-11", CultureInfo.InvariantCulture);
+            DateTime matchetDate = new DateTime();
+
             result.Equipments = await equipments.
                 Select(x => new EquipmentServiceModel()
                 {
@@ -55,13 +67,61 @@ namespace mpsPlatform.Core.Services
                     ContractNumber = x.Contract.ContractNumber,
                     LocationName = x.Location.EquimpentLocation,
                     SerialNumber = x.ЕquipmentSerialNumber,
-                    Date = "empty",
-                    CurrentCounter = x.CountersMonochromeA4
-                                      .OrderBy(y => y.Id)
-                                      .Last().CurrentCounter
+                    CountersDates = x.
+
+
                 })
                 .ToListAsync();
-            
+
+            //if (matchetDate == DateTime.MinValue)
+            //{
+            result.Equipments = await equipments.
+            Select(x => new EquipmentServiceModel()
+            {
+                Id = x.Id,
+                ManifacturerName = x.ЕquipmentModel.Мanifacturer.Name,
+                EquipmentModelName = x.ЕquipmentModel.Name,
+                CustomerName = x.Contract.Customer.Name,
+                ContractNumber = x.Contract.ContractNumber,
+                LocationName = x.Location.EquimpentLocation,
+                SerialNumber = x.ЕquipmentSerialNumber,
+                Date = x.CountersMonochromeA4
+                        .Select(y => y.DateOfEntry.Date)
+                        .OrderByDescending(y => y.Date)
+                        .First(),
+                //Date = x.CountersMonochromeA4.Select(y => y.DateOfEntry.Date).First().ToString("d", CultureInfo.InvariantCulture),
+                CurrentCounter = x.CountersMonochromeA4
+                                  .Where(x => x.DateOfEntry.Date == x.DateOfEntry.Date.)
+                                  .Select(x => x.CurrentCounter)
+                                  .OrderByDescending(x => x)
+                                  .FirstOrDefault()
+            })
+            .ToListAsync();
+            //}
+            //else
+            //{
+            //    result.Equipments = await equipments
+            //                   .Where (x => x.CountersMonochromeA4
+            //                                .Any (y => y.DateOfEntry.Date == matchetDate))
+            //                   .Select(x => new EquipmentServiceModel()
+            //                   {
+            //                       Id = x.Id,
+            //                       ManifacturerName = x.ЕquipmentModel.Мanifacturer.Name,
+            //                       EquipmentModelName = x.ЕquipmentModel.Name,
+            //                       CustomerName = x.Contract.Customer.Name,
+            //                       ContractNumber = x.Contract.ContractNumber,
+            //                       LocationName = x.Location.EquimpentLocation,
+            //                       SerialNumber = x.ЕquipmentSerialNumber,
+            //                       Date = matchetDate,
+            //                       CurrentCounter = x.CountersMonochromeA4
+            //                                         .Where(x => x.DateOfEntry.Date == matchetDate)
+            //                                         .Select(x => x.CurrentCounter)
+            //                                         .OrderByDescending(x => x)
+            //                                         .FirstOrDefault()
+            //                   })
+            //                   .ToListAsync();
+            //}
+
             return result.Equipments;
             
         }
@@ -76,7 +136,6 @@ namespace mpsPlatform.Core.Services
                                           .Distinct()
                                           .OrderBy(x => x)
                                           .ToListAsync();
-                                          
 
             return allМanifacturersNames;
         }
@@ -87,9 +146,9 @@ namespace mpsPlatform.Core.Services
             var equipmentsModels = repo.AllReadonly<ЕquipmentModel>();
 
             allEquipmentsModels = await equipmentsModels
+                                          .OrderBy(x => x.Мanifacturer.Name)
+                                          .ThenBy(x => x.Name)
                                           .Select(x => x.Name)
-                                          .Distinct()
-                                          .OrderBy(x => x)
                                           .ToListAsync();
 
             return allEquipmentsModels;
@@ -122,7 +181,5 @@ namespace mpsPlatform.Core.Services
 
             return allContractsNumbers;
         }
-
-        
     }
 }

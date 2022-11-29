@@ -31,8 +31,6 @@ namespace mpsPlatform.Controllers
 
             filters.Equipments = result;
 
-
-
             return View(filters);
         }
     }
