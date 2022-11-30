@@ -1,0 +1,33 @@
+﻿@model IEnumerable<EquipmentServiceModel>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<td>Manifacturer</td>
+			<td>Equipment Model</td>
+			<td>Customer</td>
+			<td>Contract Number</td>
+			<td>Location</td>
+			<td>Serial Number</td>
+			<td>Date</td>
+			<td>Current Counter</td>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>@item.ManifacturerName</td>
+				<td>@item.EquipmentModelName</td>
+				<td>@item.CustomerName</td>
+				<td>@item.ContractNumber</td>
+				<td>@item.LocationName</td>
+				<td>@item.SerialNumber</td>
+				<td>@item.Date</td>
+				<td>@item.Counter</td>
+			</tr>
+		}
+
+
+	</tbody>
+</table>

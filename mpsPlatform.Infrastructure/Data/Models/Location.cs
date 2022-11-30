@@ -3,11 +3,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace mpsPlatform.Infrastructure.Data.Models
 {
-    public class ЕquipmentLocation
+    public class Location
     {
-        public ЕquipmentLocation()
+        public Location()
         {
-            EquimpentSerialNumbers = new List<EquimpentSerialNumber>();
+            SerialNumbers = new List<SerialNumber>();
         }
 
         [Key]
@@ -15,13 +15,13 @@ namespace mpsPlatform.Infrastructure.Data.Models
 
         [Required]
         [StringLength(50)]
-        public string Location { get; set; } = null!;
+        public string EquimpentLocation { get; set; } = null!;
 
         [Required]
         [ForeignKey(nameof(Customer))]
         public int CustomerId { get; set; }
         public Customer Customer { get; set; } = null!;
 
-        public List<EquimpentSerialNumber> EquimpentSerialNumbers { get; set; }
+        public List<SerialNumber> SerialNumbers { get; set; }
     }
 }

@@ -6,7 +6,7 @@ namespace mpsPlatform.Infrastructure.Data.Models
     {
         public Customer()
         {
-            ЕquipmentLocations = new List<ЕquipmentLocation>();
+            Locations = new List<Location>();
             Contracts = new List<Contract>();
         }
 
@@ -17,7 +17,7 @@ namespace mpsPlatform.Infrastructure.Data.Models
         [StringLength(50)]
         public string Name { get; set; } = null!;
 
-        public List<ЕquipmentLocation> ЕquipmentLocations { get; set; }
+        public List<Location> Locations { get; set; }
 
         public List<Contract> Contracts { get; set; }
     }

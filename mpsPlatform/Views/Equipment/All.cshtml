@@ -1,0 +1,63 @@
+﻿@model EquipmentFilterModel
+
+@{
+	ViewBag.Title = "All Equipments";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<form method="get">
+	<div class="row mb-4">
+		<div class="col-md-2">
+			<label asp-for="ManifacturerName"></label>
+			<select asp-for="ManifacturerName" class="form-control">
+				<option value="">All</option>
+				@foreach (var manifacturer in Model.AllМanifacturers)
+				{
+					<option value="@manifacturer">@manifacturer</option>
+				}
+			</select>
+		</div>
+
+		<div class="col-md-2">
+			<label asp-for="EquipmentModelName"></label>
+			<select asp-for="EquipmentModelName" class="form-control">
+				<option value="">All</option>
+				@foreach (var equipmentModel in Model.AllEquipmentsModels)
+				{
+					<option value="@equipmentModel">@equipmentModel</option>
+				}
+			</select>
+		</div>
+
+		<div class="col-md-2">
+			<label asp-for="CustomerName"></label>
+			<select asp-for="CustomerName" class="form-control">
+				<option value="">All</option>
+				@foreach (var customer in Model.AllCustomersNames)
+				{
+					<option value="@customer">@customer</option>
+				}
+			</select>
+		</div>
+
+		<div class="col-md-2">
+			<label asp-for="ContractNumber"></label>
+			<select asp-for="ContractNumber" class="form-control">
+				<option value="">All</option>
+				@foreach (var contract in Model.AllContractsNumbers)
+				{
+					<option value="@contract">@contract</option>
+				}
+			</select>
+		</div>
+
+		<div class="col-md-4 mt-auto d-flex justify-content-begin">
+			<input type="submit" value="Search" class="btn btn-primary" />
+		</div>
+	</div>
+
+</form>
+
+<partial name="_EquipmentPartial" model="@Model.Equipments" />

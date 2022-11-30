@@ -8,7 +8,7 @@ namespace mpsPlatform.Infrastructure.Data.Models
     {
         public ЕquipmentModel()
         {
-           EquimpentSerialNumbers = new List<EquimpentSerialNumber>();
+           SerialNumbers = new List<SerialNumber>();
             SparePartsModels = new List<SparePartModel>();
         }
 
@@ -19,6 +19,10 @@ namespace mpsPlatform.Infrastructure.Data.Models
         [StringLength(50)]
         public string Name { get; set; } = null!;
 
+        [Required]
+        [StringLength(20)]
+        public string PartNumber { get; set; } = null!;
+
 
         [StringLength(300)]
         public string? ImageUrl { get; set; } = null!;
@@ -27,14 +31,14 @@ namespace mpsPlatform.Infrastructure.Data.Models
         public MaxPaperType MaxPaperType { get; set; }
 
         [Required]
-        public EquimpentType EquimpentType { get; set; }
+        public EquipmentType EquimpentType { get; set; }
 
         [Required]
         [ForeignKey(nameof(Мanifacturer))]
         public int МanifacturerId { get; set; }
         public Мanifacturer Мanifacturer { get; set; } = null!;
 
-       public List<EquimpentSerialNumber> EquimpentSerialNumbers{ get; set; }
+        public List<SerialNumber> SerialNumbers{ get; set; }
 
         public List<SparePartModel> SparePartsModels { get; set; }
     }
