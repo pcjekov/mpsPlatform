@@ -30,6 +30,8 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IEquipmentService, EquipmentService>();
 builder.Services.AddScoped<IRepository, Repository>();
+//builder.Services.AddScoped<ApplicationDbContext>();
+
 
 var app = builder.Build();
 

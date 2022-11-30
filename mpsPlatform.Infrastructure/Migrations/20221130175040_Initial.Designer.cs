@@ -12,7 +12,7 @@ using mpsPlatform.Infrastructure.Data;
 namespace mpsPlatform.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221119203604_Initial")]
+    [Migration("20221130175040_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -145,17 +145,17 @@ namespace mpsPlatform.Infrastructure.Migrations
                         {
                             Id = "dea12856-c198-4129-b3f3-b893d8395082",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4cc0c97c-96ac-4788-8911-4e166878b579",
+                            ConcurrencyStamp = "8004c4aa-2a54-4ebb-a212-a53b4a9b7d78",
                             Email = "admin@mpsPlatform.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@mpsplatform.com",
-                            NormalizedUserName = "admin@mpsplatform.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEF6cOBmwT4gTLflHrK0OGryULRj5Z6D4uT/no3KGKQNOFLc4Xqpfio1o5d9yYRBblQ==",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIF/QsO0AvqdOukAAC6alkPn8Vc9MW6W2WEuaIr5FXRGorT2LHTGTLH0cW5Lv41dNg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c334512d-c8e1-46db-bca2-d9677a089346",
+                            SecurityStamp = "6cac2cd5-533f-4fb2-8e2a-80c2a73c8c10",
                             TwoFactorEnabled = false,
-                            UserName = "admin@mpsPlatform.com"
+                            UserName = "admin"
                         });
                 });
 
@@ -411,7 +411,7 @@ namespace mpsPlatform.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.CounterColorA3", b =>
+            modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.Counter", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -419,52 +419,19 @@ namespace mpsPlatform.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("CurrentCounter")
+                    b.Property<int>("ColorA3")
                         .HasColumnType("int");
 
-                    b.Property<int>("DateOfEntryId")
+                    b.Property<int>("ColorA4")
                         .HasColumnType("int");
 
-                    b.Property<int>("SerialNumberId")
+                    b.Property<DateTime>("DateOfCounter")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("MonochromeA3")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("DateOfEntryId");
-
-                    b.HasIndex("SerialNumberId");
-
-                    b.ToTable("CountersColorA3");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CurrentCounter = 4670,
-                            DateOfEntryId = 1,
-                            SerialNumberId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CurrentCounter = 390,
-                            DateOfEntryId = 1,
-                            SerialNumberId = 2
-                        });
-                });
-
-            modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.CounterColorA4", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("CurrentCounter")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DateOfEntryId")
+                    b.Property<int>("MonochromeA4")
                         .HasColumnType("int");
 
                     b.Property<int>("SerialNumberId")
@@ -472,137 +439,69 @@ namespace mpsPlatform.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DateOfEntryId");
-
                     b.HasIndex("SerialNumberId");
 
-                    b.ToTable("CountersColorA4");
+                    b.ToTable("Counters");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            CurrentCounter = 336300,
-                            DateOfEntryId = 1,
+                            ColorA3 = 4670,
+                            ColorA4 = 336300,
+                            DateOfCounter = new DateTime(2022, 8, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MonochromeA3 = 900,
+                            MonochromeA4 = 95000,
                             SerialNumberId = 1
                         },
                         new
                         {
                             Id = 2,
-                            CurrentCounter = 35800,
-                            DateOfEntryId = 1,
-                            SerialNumberId = 2
-                        });
-                });
-
-            modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.CounterMonochromeA3", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("CurrentCounter")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DateOfEntryId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SerialNumberId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DateOfEntryId");
-
-                    b.HasIndex("SerialNumberId");
-
-                    b.ToTable("CountersMonochromeA3");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CurrentCounter = 900,
-                            DateOfEntryId = 1,
-                            SerialNumberId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CurrentCounter = 10,
-                            DateOfEntryId = 1,
-                            SerialNumberId = 2
-                        });
-                });
-
-            modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.CounterMonochromeA4", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("CurrentCounter")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DateOfEntryId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SerialNumberId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DateOfEntryId");
-
-                    b.HasIndex("SerialNumberId");
-
-                    b.ToTable("CountersMonochromeA4");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CurrentCounter = 95000,
-                            DateOfEntryId = 1,
-                            SerialNumberId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CurrentCounter = 4700,
-                            DateOfEntryId = 1,
+                            ColorA3 = 390,
+                            ColorA4 = 35800,
+                            DateOfCounter = new DateTime(2022, 8, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MonochromeA3 = 10,
+                            MonochromeA4 = 4700,
                             SerialNumberId = 2
                         },
                         new
                         {
                             Id = 3,
-                            CurrentCounter = 58400,
-                            DateOfEntryId = 1,
+                            ColorA3 = 0,
+                            ColorA4 = 0,
+                            DateOfCounter = new DateTime(2022, 8, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MonochromeA3 = 0,
+                            MonochromeA4 = 58400,
                             SerialNumberId = 3
                         },
                         new
                         {
                             Id = 4,
-                            CurrentCounter = 94700,
-                            DateOfEntryId = 2,
+                            ColorA3 = 0,
+                            ColorA4 = 0,
+                            DateOfCounter = new DateTime(2022, 9, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MonochromeA3 = 0,
+                            MonochromeA4 = 94700,
                             SerialNumberId = 4
                         },
                         new
                         {
                             Id = 5,
-                            CurrentCounter = 232100,
-                            DateOfEntryId = 2,
+                            ColorA3 = 0,
+                            ColorA4 = 0,
+                            DateOfCounter = new DateTime(2022, 9, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MonochromeA3 = 0,
+                            MonochromeA4 = 232100,
                             SerialNumberId = 5
                         },
                         new
                         {
                             Id = 6,
-                            CurrentCounter = 137200,
-                            DateOfEntryId = 3,
+                            ColorA3 = 0,
+                            ColorA4 = 0,
+                            DateOfCounter = new DateTime(2022, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            MonochromeA3 = 0,
+                            MonochromeA4 = 137200,
                             SerialNumberId = 6
                         });
                 });
@@ -634,44 +533,6 @@ namespace mpsPlatform.Infrastructure.Migrations
                         {
                             Id = 2,
                             Name = "Ring Ltd"
-                        });
-                });
-
-            modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.DateOfEntry", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("DatesOfEntrys");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Date = new DateTime(2022, 8, 11, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Date = new DateTime(2022, 9, 11, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Date = new DateTime(2022, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Date = new DateTime(2022, 7, 11, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -1163,78 +1024,13 @@ namespace mpsPlatform.Infrastructure.Migrations
                     b.Navigation("Customer");
                 });
 
-            modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.CounterColorA3", b =>
+            modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.Counter", b =>
                 {
-                    b.HasOne("mpsPlatform.Infrastructure.Data.Models.DateOfEntry", "DateOfEntry")
-                        .WithMany("CountersColorA3")
-                        .HasForeignKey("DateOfEntryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("mpsPlatform.Infrastructure.Data.Models.SerialNumber", "SerialNumber")
-                        .WithMany("CountersColorA3")
+                        .WithMany("Counters")
                         .HasForeignKey("SerialNumberId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("DateOfEntry");
-
-                    b.Navigation("SerialNumber");
-                });
-
-            modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.CounterColorA4", b =>
-                {
-                    b.HasOne("mpsPlatform.Infrastructure.Data.Models.DateOfEntry", "DateOfEntry")
-                        .WithMany("CountersColorA4")
-                        .HasForeignKey("DateOfEntryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("mpsPlatform.Infrastructure.Data.Models.SerialNumber", "SerialNumber")
-                        .WithMany("CountersColorA4")
-                        .HasForeignKey("SerialNumberId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("DateOfEntry");
-
-                    b.Navigation("SerialNumber");
-                });
-
-            modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.CounterMonochromeA3", b =>
-                {
-                    b.HasOne("mpsPlatform.Infrastructure.Data.Models.DateOfEntry", "DateOfEntry")
-                        .WithMany("CountersMonochromeA3")
-                        .HasForeignKey("DateOfEntryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("mpsPlatform.Infrastructure.Data.Models.SerialNumber", "SerialNumber")
-                        .WithMany("CountersMonochromeA3")
-                        .HasForeignKey("SerialNumberId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("DateOfEntry");
-
-                    b.Navigation("SerialNumber");
-                });
-
-            modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.CounterMonochromeA4", b =>
-                {
-                    b.HasOne("mpsPlatform.Infrastructure.Data.Models.DateOfEntry", "DateOfEntry")
-                        .WithMany("CountersMonochromeA4")
-                        .HasForeignKey("DateOfEntryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("mpsPlatform.Infrastructure.Data.Models.SerialNumber", "SerialNumber")
-                        .WithMany("CountersMonochromeA4")
-                        .HasForeignKey("SerialNumberId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("DateOfEntry");
 
                     b.Navigation("SerialNumber");
                 });
@@ -1320,17 +1116,6 @@ namespace mpsPlatform.Infrastructure.Migrations
                     b.Navigation("Locations");
                 });
 
-            modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.DateOfEntry", b =>
-                {
-                    b.Navigation("CountersColorA3");
-
-                    b.Navigation("CountersColorA4");
-
-                    b.Navigation("CountersMonochromeA3");
-
-                    b.Navigation("CountersMonochromeA4");
-                });
-
             modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.Location", b =>
                 {
                     b.Navigation("SerialNumbers");
@@ -1338,13 +1123,7 @@ namespace mpsPlatform.Infrastructure.Migrations
 
             modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.SerialNumber", b =>
                 {
-                    b.Navigation("CountersColorA3");
-
-                    b.Navigation("CountersColorA4");
-
-                    b.Navigation("CountersMonochromeA3");
-
-                    b.Navigation("CountersMonochromeA4");
+                    b.Navigation("Counters");
                 });
 
             modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.SparePart", b =>

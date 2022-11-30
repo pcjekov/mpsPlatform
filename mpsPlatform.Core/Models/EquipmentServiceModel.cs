@@ -19,12 +19,12 @@ namespace mpsPlatform.Models
         
         public string SerialNumber { get; set; } = null!;
 
-        public IEnumerable<EquipmentServiceCounterDateModel> CountersDates { get; set; }
-        //public DateTime Date { get; set; }
+        //public IEnumerable<EquipmentServiceCounterDateModel> CountersDates { get; set; }
+        public DateTime Date { get; set; }
         ////public string Date { get; set; } = null!;
 
 
-        //public int CurrentCounter { get; set; }
+        public int Counter { get; set; }
 
     }
 }

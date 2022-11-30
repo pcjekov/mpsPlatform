@@ -75,19 +75,6 @@ namespace mpsPlatform.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DatesOfEntrys",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DatesOfEntrys", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "InstallersPeople",
                 columns: table => new
                 {
@@ -346,107 +333,23 @@ namespace mpsPlatform.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CountersColorA3",
+                name: "Counters",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CurrentCounter = table.Column<int>(type: "int", nullable: false),
-                    SerialNumberId = table.Column<int>(type: "int", nullable: false),
-                    DateOfEntryId = table.Column<int>(type: "int", nullable: false)
+                    MonochromeA4 = table.Column<int>(type: "int", nullable: false),
+                    MonochromeA3 = table.Column<int>(type: "int", nullable: false),
+                    ColorA4 = table.Column<int>(type: "int", nullable: false),
+                    ColorA3 = table.Column<int>(type: "int", nullable: false),
+                    DateOfCounter = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    SerialNumberId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CountersColorA3", x => x.Id);
+                    table.PrimaryKey("PK_Counters", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CountersColorA3_DatesOfEntrys_DateOfEntryId",
-                        column: x => x.DateOfEntryId,
-                        principalTable: "DatesOfEntrys",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CountersColorA3_SerialNumbers_SerialNumberId",
-                        column: x => x.SerialNumberId,
-                        principalTable: "SerialNumbers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CountersColorA4",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CurrentCounter = table.Column<int>(type: "int", nullable: false),
-                    SerialNumberId = table.Column<int>(type: "int", nullable: false),
-                    DateOfEntryId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CountersColorA4", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_CountersColorA4_DatesOfEntrys_DateOfEntryId",
-                        column: x => x.DateOfEntryId,
-                        principalTable: "DatesOfEntrys",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CountersColorA4_SerialNumbers_SerialNumberId",
-                        column: x => x.SerialNumberId,
-                        principalTable: "SerialNumbers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CountersMonochromeA3",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CurrentCounter = table.Column<int>(type: "int", nullable: false),
-                    SerialNumberId = table.Column<int>(type: "int", nullable: false),
-                    DateOfEntryId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CountersMonochromeA3", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_CountersMonochromeA3_DatesOfEntrys_DateOfEntryId",
-                        column: x => x.DateOfEntryId,
-                        principalTable: "DatesOfEntrys",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CountersMonochromeA3_SerialNumbers_SerialNumberId",
-                        column: x => x.SerialNumberId,
-                        principalTable: "SerialNumbers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CountersMonochromeA4",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CurrentCounter = table.Column<int>(type: "int", nullable: false),
-                    SerialNumberId = table.Column<int>(type: "int", nullable: false),
-                    DateOfEntryId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CountersMonochromeA4", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_CountersMonochromeA4_DatesOfEntrys_DateOfEntryId",
-                        column: x => x.DateOfEntryId,
-                        principalTable: "DatesOfEntrys",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CountersMonochromeA4_SerialNumbers_SerialNumberId",
+                        name: "FK_Counters_SerialNumbers_SerialNumberId",
                         column: x => x.SerialNumberId,
                         principalTable: "SerialNumbers",
                         principalColumn: "Id",
@@ -456,7 +359,7 @@ namespace mpsPlatform.Infrastructure.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "dea12856-c198-4129-b3f3-b893d8395082", 0, "4cc0c97c-96ac-4788-8911-4e166878b579", "admin@mpsPlatform.com", false, false, null, "admin@mpsplatform.com", "admin@mpsplatform.com", "AQAAAAEAACcQAAAAEF6cOBmwT4gTLflHrK0OGryULRj5Z6D4uT/no3KGKQNOFLc4Xqpfio1o5d9yYRBblQ==", null, false, "c334512d-c8e1-46db-bca2-d9677a089346", false, "admin@mpsPlatform.com" });
+                values: new object[] { "dea12856-c198-4129-b3f3-b893d8395082", 0, "8004c4aa-2a54-4ebb-a212-a53b4a9b7d78", "admin@mpsPlatform.com", false, false, null, "admin@mpsplatform.com", "ADMIN", "AQAAAAEAACcQAAAAEIF/QsO0AvqdOukAAC6alkPn8Vc9MW6W2WEuaIr5FXRGorT2LHTGTLH0cW5Lv41dNg==", null, false, "6cac2cd5-533f-4fb2-8e2a-80c2a73c8c10", false, "admin" });
 
             migrationBuilder.InsertData(
                 table: "Customers",
@@ -465,17 +368,6 @@ namespace mpsPlatform.Infrastructure.Migrations
                 {
                     { 1, "Metal Construct PLC" },
                     { 2, "Ring Ltd" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "DatesOfEntrys",
-                columns: new[] { "Id", "Date" },
-                values: new object[,]
-                {
-                    { 1, new DateTime(2022, 8, 11, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, new DateTime(2022, 9, 11, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 3, new DateTime(2022, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 4, new DateTime(2022, 7, 11, 0, 0, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.InsertData(
@@ -579,43 +471,16 @@ namespace mpsPlatform.Infrastructure.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "CountersColorA3",
-                columns: new[] { "Id", "CurrentCounter", "DateOfEntryId", "SerialNumberId" },
+                table: "Counters",
+                columns: new[] { "Id", "ColorA3", "ColorA4", "DateOfCounter", "MonochromeA3", "MonochromeA4", "SerialNumberId" },
                 values: new object[,]
                 {
-                    { 1, 4670, 1, 1 },
-                    { 2, 390, 1, 2 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "CountersColorA4",
-                columns: new[] { "Id", "CurrentCounter", "DateOfEntryId", "SerialNumberId" },
-                values: new object[,]
-                {
-                    { 1, 336300, 1, 1 },
-                    { 2, 35800, 1, 2 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "CountersMonochromeA3",
-                columns: new[] { "Id", "CurrentCounter", "DateOfEntryId", "SerialNumberId" },
-                values: new object[,]
-                {
-                    { 1, 900, 1, 1 },
-                    { 2, 10, 1, 2 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "CountersMonochromeA4",
-                columns: new[] { "Id", "CurrentCounter", "DateOfEntryId", "SerialNumberId" },
-                values: new object[,]
-                {
-                    { 1, 95000, 1, 1 },
-                    { 2, 4700, 1, 2 },
-                    { 3, 58400, 1, 3 },
-                    { 4, 94700, 2, 4 },
-                    { 5, 232100, 2, 5 },
-                    { 6, 137200, 3, 6 }
+                    { 1, 4670, 336300, new DateTime(2022, 8, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), 900, 95000, 1 },
+                    { 2, 390, 35800, new DateTime(2022, 8, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), 10, 4700, 2 },
+                    { 3, 0, 0, new DateTime(2022, 8, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, 58400, 3 },
+                    { 4, 0, 0, new DateTime(2022, 9, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, 94700, 4 },
+                    { 5, 0, 0, new DateTime(2022, 9, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, 232100, 5 },
+                    { 6, 0, 0, new DateTime(2022, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, 137200, 6 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -668,43 +533,8 @@ namespace mpsPlatform.Infrastructure.Migrations
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CountersColorA3_DateOfEntryId",
-                table: "CountersColorA3",
-                column: "DateOfEntryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CountersColorA3_SerialNumberId",
-                table: "CountersColorA3",
-                column: "SerialNumberId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CountersColorA4_DateOfEntryId",
-                table: "CountersColorA4",
-                column: "DateOfEntryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CountersColorA4_SerialNumberId",
-                table: "CountersColorA4",
-                column: "SerialNumberId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CountersMonochromeA3_DateOfEntryId",
-                table: "CountersMonochromeA3",
-                column: "DateOfEntryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CountersMonochromeA3_SerialNumberId",
-                table: "CountersMonochromeA3",
-                column: "SerialNumberId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CountersMonochromeA4_DateOfEntryId",
-                table: "CountersMonochromeA4",
-                column: "DateOfEntryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CountersMonochromeA4_SerialNumberId",
-                table: "CountersMonochromeA4",
+                name: "IX_Counters_SerialNumberId",
+                table: "Counters",
                 column: "SerialNumberId");
 
             migrationBuilder.CreateIndex(
@@ -751,16 +581,7 @@ namespace mpsPlatform.Infrastructure.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "CountersColorA3");
-
-            migrationBuilder.DropTable(
-                name: "CountersColorA4");
-
-            migrationBuilder.DropTable(
-                name: "CountersMonochromeA3");
-
-            migrationBuilder.DropTable(
-                name: "CountersMonochromeA4");
+                name: "Counters");
 
             migrationBuilder.DropTable(
                 name: "InstallersPeople");
@@ -773,9 +594,6 @@ namespace mpsPlatform.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "DatesOfEntrys");
 
             migrationBuilder.DropTable(
                 name: "SerialNumbers");

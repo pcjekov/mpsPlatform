@@ -13,12 +13,9 @@ namespace mpsPlatform.Infrastructure.Data
         {
         }
 
-        public DbSet<CounterColorA3> CountersColorA3 { get; set; } = null!;
-        public DbSet<CounterColorA4> CountersColorA4 { get; set; } = null!;
-        public DbSet<CounterMonochromeA3> CountersMonochromeA3 { get; set; } = null!;
-        public DbSet<CounterMonochromeA4> CountersMonochromeA4 { get; set; } = null!;
+        
+        public DbSet<Counter> Counters { get; set; } = null!;
         public DbSet<Customer> Customers { get; set; } = null!;
-        public DbSet<DateOfEntry> DatesOfEntrys { get; set; } = null!;
         public DbSet<SerialNumber> SerialNumbers { get; set; } = null!;
         public DbSet<InstallerMan> InstallersPeople { get; set; } = null!;
         public DbSet<Location> Locations { get; set; } = null!;
@@ -61,11 +58,7 @@ namespace mpsPlatform.Infrastructure.Data
             modelBuilder.ApplyConfiguration(new ContractConfiguration());
             modelBuilder.ApplyConfiguration(new LocationConfiguration());
             modelBuilder.ApplyConfiguration(new SerialNumberConfiguration());
-            modelBuilder.ApplyConfiguration(new DateOfEntryConfiguration());
-            modelBuilder.ApplyConfiguration(new CounterColorA3Configuration());
-            modelBuilder.ApplyConfiguration(new CounterColorA4Configuration());
-            modelBuilder.ApplyConfiguration(new CounterMonochromeA3Configuration());
-            modelBuilder.ApplyConfiguration(new CounterMonochromeA4Configuration());
+            modelBuilder.ApplyConfiguration(new CounterConfiguration());
 
 
             base.OnModelCreating(modelBuilder);

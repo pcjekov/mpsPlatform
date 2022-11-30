@@ -8,10 +8,7 @@ namespace mpsPlatform.Infrastructure.Data.Models
     {
         public SerialNumber()
         {
-            CountersMonochromeA4 = new List<CounterMonochromeA4>();
-            CountersMonochromeA3 = new List<CounterMonochromeA3>();
-            CountersColorA4 = new List<CounterColorA4>();
-            CountersColorA3 = new List<CounterColorA3>();
+            Counters = new List<Counter>();
         }
 
         [Key]
@@ -49,9 +46,7 @@ namespace mpsPlatform.Infrastructure.Data.Models
         [Precision(10, 8)]
         public decimal PriceColorA3 { get; set; }
 
-        public List<CounterMonochromeA4> CountersMonochromeA4 { get; set; }
-        public List<CounterMonochromeA3> CountersMonochromeA3 { get; set; }
-        public List<CounterColorA4> CountersColorA4 { get; set; }
-        public List<CounterColorA3> CountersColorA3 { get; set; }
+        public List<Counter> Counters { get; set; }
+        
     }
 }

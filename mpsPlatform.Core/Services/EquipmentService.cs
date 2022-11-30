@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using mpsPlatform.Core.Contracts;
 using mpsPlatform.Core.Models;
+using mpsPlatform.Infrastructure.Data;
 using mpsPlatform.Infrastructure.Data.Common;
 using mpsPlatform.Infrastructure.Data.Models;
 using mpsPlatform.Models;
-using System.ComponentModel.DataAnnotations;
+using System.Collections;
 using System.Globalization;
 
 namespace mpsPlatform.Core.Services
@@ -13,52 +14,51 @@ namespace mpsPlatform.Core.Services
     {
         private readonly IRepository repo;
 
-        public EquipmentService(IRepository _repo)
+        private readonly ApplicationDbContext context;
+
+        public EquipmentService(IRepository _repo, ApplicationDbContext _context)
         {
             repo = _repo;
-        }       
+            context = _context;
+        }
 
         public async Task<IEnumerable<EquipmentServiceModel>> GetAllAsync(
                                                             string? manifacturer,
                                                             string? equipmentModel,
                                                             string? customerName,
                                                             string? contractNumber)
+                                                            
         {
             var result = new EquipmentFilterModel();
+
             var equipments = repo.AllReadonly<SerialNumber>();
 
             if (string.IsNullOrEmpty(manifacturer) == false)
             {
-                equipments = equipments.
-                             Where(x => x.ЕquipmentModel.Мanifacturer.Name == manifacturer);
+                equipments = equipments
+                    .Where(x => x.ЕquipmentModel.Мanifacturer.Name == manifacturer);
             }
 
             if (string.IsNullOrEmpty(equipmentModel) == false)
             {
-                equipments = equipments.
-                             Where(x => x.ЕquipmentModel.Name == equipmentModel);
+                equipments = equipments
+                             .Where(x => x.ЕquipmentModel.Name == equipmentModel);
             }
 
             if (string.IsNullOrEmpty(customerName) == false)
             {
-                equipments = equipments.
-                             Where(x => x.Contract.Customer.Name == customerName);
+                equipments = equipments
+                             .Where(x => x.Contract.Customer.Name == customerName);
             }
 
             if (string.IsNullOrEmpty(contractNumber) == false)
             {
-                equipments = equipments.
-                             Where(x => x.Contract.ContractNumber == contractNumber);
+                equipments = equipments
+                             .Where(x => x.Contract.ContractNumber == contractNumber);
             }
 
-            // DateTime lastDate = await equipments
-            //                         .Select(x => x.);
-
-            //DateTime matchetDate = DateTime.Parse("2022-09-11", CultureInfo.InvariantCulture);
-            DateTime matchetDate = new DateTime();
-
-            result.Equipments = await equipments.
-                Select(x => new EquipmentServiceModel()
+            result.Equipments = await equipments
+                .Select(x => new EquipmentServiceModel()
                 {
                     Id = x.Id,
                     ManifacturerName = x.ЕquipmentModel.Мanifacturer.Name,
@@ -67,61 +67,17 @@ namespace mpsPlatform.Core.Services
                     ContractNumber = x.Contract.ContractNumber,
                     LocationName = x.Location.EquimpentLocation,
                     SerialNumber = x.ЕquipmentSerialNumber,
-                    CountersDates = x.
-
-
+                    Counter = x.Counters
+                               .Select(y => y.MonochromeA4)
+                               .OrderByDescending(y => y)
+                               .First(),
+                    Date = x.Counters
+                            .Select(y => y.DateOfCounter)
+                            .OrderByDescending(y => y)
+                            .First()
                 })
                 .ToListAsync();
-
-            //if (matchetDate == DateTime.MinValue)
-            //{
-            result.Equipments = await equipments.
-            Select(x => new EquipmentServiceModel()
-            {
-                Id = x.Id,
-                ManifacturerName = x.ЕquipmentModel.Мanifacturer.Name,
-                EquipmentModelName = x.ЕquipmentModel.Name,
-                CustomerName = x.Contract.Customer.Name,
-                ContractNumber = x.Contract.ContractNumber,
-                LocationName = x.Location.EquimpentLocation,
-                SerialNumber = x.ЕquipmentSerialNumber,
-                Date = x.CountersMonochromeA4
-                        .Select(y => y.DateOfEntry.Date)
-                        .OrderByDescending(y => y.Date)
-                        .First(),
-                //Date = x.CountersMonochromeA4.Select(y => y.DateOfEntry.Date).First().ToString("d", CultureInfo.InvariantCulture),
-                CurrentCounter = x.CountersMonochromeA4
-                                  .Where(x => x.DateOfEntry.Date == x.DateOfEntry.Date.)
-                                  .Select(x => x.CurrentCounter)
-                                  .OrderByDescending(x => x)
-                                  .FirstOrDefault()
-            })
-            .ToListAsync();
-            //}
-            //else
-            //{
-            //    result.Equipments = await equipments
-            //                   .Where (x => x.CountersMonochromeA4
-            //                                .Any (y => y.DateOfEntry.Date == matchetDate))
-            //                   .Select(x => new EquipmentServiceModel()
-            //                   {
-            //                       Id = x.Id,
-            //                       ManifacturerName = x.ЕquipmentModel.Мanifacturer.Name,
-            //                       EquipmentModelName = x.ЕquipmentModel.Name,
-            //                       CustomerName = x.Contract.Customer.Name,
-            //                       ContractNumber = x.Contract.ContractNumber,
-            //                       LocationName = x.Location.EquimpentLocation,
-            //                       SerialNumber = x.ЕquipmentSerialNumber,
-            //                       Date = matchetDate,
-            //                       CurrentCounter = x.CountersMonochromeA4
-            //                                         .Where(x => x.DateOfEntry.Date == matchetDate)
-            //                                         .Select(x => x.CurrentCounter)
-            //                                         .OrderByDescending(x => x)
-            //                                         .FirstOrDefault()
-            //                   })
-            //                   .ToListAsync();
-            //}
-
+            
             return result.Equipments;
             
         }
