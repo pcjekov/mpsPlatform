@@ -15,5 +15,9 @@ namespace mpsPlatform.Core.Contracts
         Task AddManufacturer(ManufacturerModel model);
 
         Task<bool> ExistManufacturer(string name);
+
+        Task<bool> ExistManufacturerIsDeleted(string name);
+
+        Task RestoreDeletedManufacturer(string name);
     }
 }

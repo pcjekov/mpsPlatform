@@ -26,7 +26,7 @@ namespace mpsPlatform.Core.Services
         {
             var result = new EquipmentFilterModel();
 
-            var equipments = repo.AllReadonly<SerialNumber>();
+            var equipments = repo.AllReadonly<SerialNumber>().Where(x => !x.IsDeleted);
 
             if (string.IsNullOrEmpty(manufacturer) == false)
             {
@@ -106,7 +106,7 @@ namespace mpsPlatform.Core.Services
         public async Task<IEnumerable<string>> AllManufacturersNames()
         {
             var allManufacturersNames = new List<string>();
-            var manufacturers = repo.AllReadonly<Manufacturer>();
+            var manufacturers = repo.AllReadonly<Manufacturer>().Where(x => !x.IsDeleted);
 
             allManufacturersNames = await manufacturers
                                           .Select(x => x.Name)
@@ -120,7 +120,7 @@ namespace mpsPlatform.Core.Services
         public async Task<IEnumerable<string>> AllEquipmentsModelsNames()
         {
             var allEquipmentsModels = new List<string>();
-            var equipmentsModels = repo.AllReadonly<ЕquipmentModel>();
+            var equipmentsModels = repo.AllReadonly<ЕquipmentModel>().Where(x => !x.IsDeleted);
 
             allEquipmentsModels = await equipmentsModels
                                           .OrderBy(x => x.Manufacturer.Name)
@@ -134,7 +134,7 @@ namespace mpsPlatform.Core.Services
         public async Task<IEnumerable<string>> AllCustomersNames()
         {
             var allCustomersName = new List<string>();
-            var customers = repo.AllReadonly<Customer>();
+            var customers = repo.AllReadonly<Customer>().Where(x => !x.IsDeleted);
 
             allCustomersName = await customers
                                           .Select(x => x.Name)
@@ -148,7 +148,7 @@ namespace mpsPlatform.Core.Services
         public async Task<IEnumerable<string>> AllContractsNumbers()
         {
             var allContractsNumbers = new List<string>();
-            var contracts = repo.AllReadonly<Contract>();
+            var contracts = repo.AllReadonly<Contract>().Where(x => !x.IsDeleted);
 
             allContractsNumbers = await contracts
                                           .Select(x => x.ContractNumber)
@@ -162,7 +162,7 @@ namespace mpsPlatform.Core.Services
         public async Task<IEnumerable<DateTime>> AllDatesOfCounters()
         {
             var allDatesOfCounters = new List<DateTime>();
-            var dates = repo.AllReadonly<Counter>();
+            var dates = repo.AllReadonly<Counter>().Where(x => !x.IsDeleted);
 
             allDatesOfCounters = await dates
                                           .Select(x => x.DateOfCounter)

@@ -47,6 +47,9 @@ namespace mpsPlatform.Infrastructure.Data.Models
         public decimal PriceColorA3 { get; set; }
 
         public List<Counter> Counters { get; set; }
-        
+
+        [Required]
+        public bool IsDeleted { get; set; } = false;
+
     }
 }

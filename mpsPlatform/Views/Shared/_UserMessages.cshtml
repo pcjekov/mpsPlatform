@@ -5,8 +5,22 @@
     <div class="alert alert-danger" role="alert">
         @TempData[MessageConstant.ErrorMessage]?.ToString()
     </div>
-
 }
+
+@if (TempData[MessageConstant.WarningMessage] != null)
+{
+        <script>
+            $(function () { toastr.warning('@TempData[MessageConstant.WarningMessage]?.ToString()'); });
+        </script>
+}
+
+@*@if (TempData[MessageConstant.ErrorMessage] != null)
+{
+    <div class="alert alert-warning" role="alert">
+        @TempData[MessageConstant.WarningMessage]?.ToString()
+    </div>
+
+}*@
 
 @*@if (TempData[MessageConstant.ErrorMessage] != null)
 {
@@ -15,16 +29,14 @@
     </script>
 }*@
 
-@*@if (TempData[MessageConstant.WarningMessage] != null)
-{
-    <script>
-        $(function () { toastr.warning('@TempData[MessageConstant.WarningMessage].ToString()'); });
-    </script>
-}
 
-@if (TempData[MessageConstant.SuccessMessage] != null)
+
+@*@if (TempData[MessageConstant.SuccessMessage] != null)
 {
     <script>
         $(function () { toastr.success('@TempData[MessageConstant.SuccessMessage].ToString()'); });
     </script>
 }*@
+
+
+@*https://getbootstrap.com/docs/5.2/components/alerts/*@

@@ -41,5 +41,8 @@ namespace mpsPlatform.Infrastructure.Data.Models
         public List<SerialNumber> SerialNumbers{ get; set; }
 
         public List<SparePartModel> SparePartsModels { get; set; }
+
+        [Required]
+        public bool IsDeleted { get; set; } = false;
     }
 }

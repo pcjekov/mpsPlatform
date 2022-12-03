@@ -19,7 +19,7 @@ namespace mpsPlatform.Core.Services
 		{
             var result = new ManufacturerListModel();
 
-            var manufacturers = repo.AllReadonly<Manufacturer>();
+            var manufacturers = repo.AllReadonly<Manufacturer>().Where(x => !x.IsDeleted);
 
             result.Manufacturers = await manufacturers
                                    .Select(x => new ManufacturerModel()
@@ -44,10 +44,24 @@ namespace mpsPlatform.Core.Services
             await repo.SaveChangesAsync();
         }
 
+        public async Task RestoreDeletedManufacturer(string name)
+        {
+            var matched = await repo.All<Manufacturer>().FirstAsync(x => x.IsDeleted && x.Name == name);
+
+            matched.IsDeleted = false;
+
+            await repo.SaveChangesAsync();
+        }
+
         public async Task<bool> ExistManufacturer(string name)
         {
-            return await repo.AllReadonly<Manufacturer>().AnyAsync(x => x.Name == name);
+            return await repo.AllReadonly<Manufacturer>().AnyAsync(x => !x.IsDeleted && x.Name == name);
         }
-        
+
+        public async Task<bool> ExistManufacturerIsDeleted(string name)
+        {
+            return await repo.AllReadonly<Manufacturer>().AnyAsync(x => x.IsDeleted && x.Name == name);
+        }
+
     }
 }

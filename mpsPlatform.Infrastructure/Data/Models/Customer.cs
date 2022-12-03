@@ -20,5 +20,8 @@ namespace mpsPlatform.Infrastructure.Data.Models
         public List<Location> Locations { get; set; }
 
         public List<Contract> Contracts { get; set; }
+
+        [Required]
+        public bool IsDeleted { get; set; } = false;
     }
 }

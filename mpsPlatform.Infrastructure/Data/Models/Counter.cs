@@ -28,6 +28,7 @@ namespace mpsPlatform.Infrastructure.Data.Models
         public int SerialNumberId { get; set; }
         public SerialNumber SerialNumber { get; set; } = null!;
 
-        
+        [Required]
+        public bool IsDeleted { get; set; } = false;
     }
 }

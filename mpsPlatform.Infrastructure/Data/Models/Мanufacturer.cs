@@ -18,5 +18,8 @@ namespace mpsPlatform.Infrastructure.Data.Models
         public string Name { get; set; } = null!;
 
         public List<ЕquipmentModel> ЕquipmentModels { get; set; }
+
+        [Required]
+        public bool IsDeleted { get; set; } = false;
     }
 }

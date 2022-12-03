@@ -23,5 +23,8 @@ namespace mpsPlatform.Infrastructure.Data.Models
         public Customer Customer { get; set; } = null!;
 
         public List<SerialNumber> SerialNumbers { get; set; }
+
+        [Required]
+        public bool IsDeleted { get; set; } = false;
     }
 }

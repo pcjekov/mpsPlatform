@@ -43,7 +43,16 @@ namespace mpsPlatform.Controllers
         {
             //TODO: проерка дали е админ
 
-            if (await manufacturerService.ExistManufacturer(model.Name))
+            if (await manufacturerService.ExistManufacturerIsDeleted(model.Name))
+            {
+                //ModelState.AddModelError(model.Name, MessageConstant.ManufacturerExistMassage);
+                await manufacturerService.RestoreDeletedManufacturer(model.Name);
+                TempData[MessageConstant.WarningMessage] = MessageConstant.ManufacturerRestoredMassage;
+
+                return RedirectToAction(nameof(Index));
+            }
+
+            else if (await manufacturerService.ExistManufacturer(model.Name))
             {
                 ModelState.AddModelError(model.Name, MessageConstant.ManufacturerExistMassage);
                 TempData[MessageConstant.ErrorMessage] = MessageConstant.ManufacturerExistMassage;

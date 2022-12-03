@@ -10,5 +10,8 @@ namespace mpsPlatform.Infrastructure.Data.Models
         [Required]
         [StringLength(50)]
         public string FullName { get; set; } = null!;
+
+        [Required]
+        public bool IsDeleted { get; set; } = false;
     }
 }

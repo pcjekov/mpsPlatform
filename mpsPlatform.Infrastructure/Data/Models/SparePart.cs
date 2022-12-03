@@ -29,5 +29,8 @@ namespace mpsPlatform.Infrastructure.Data.Models
         public int Resource { get; set; }
 
         public List<SparePartModel> SparePartsModels { get; set; }
+
+        [Required]
+        public bool IsDeleted { get; set; } = false;
     }
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using mpsPlatform.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using mpsPlatform.Infrastructure.Data;
 namespace mpsPlatform.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221203204847_IsDeleted")]
+    partial class IsDeleted
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -143,15 +145,15 @@ namespace mpsPlatform.Infrastructure.Migrations
                         {
                             Id = "dea12856-c198-4129-b3f3-b893d8395082",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a22ea8dd-3b74-436b-8bea-ed78cdf367a4",
+                            ConcurrencyStamp = "20e4d656-5f06-44cb-92ff-c0537464da88",
                             Email = "admin@mpsPlatform.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@mpsplatform.com",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEH1CABU7tKhGh5TmQzCJC9R4rG4oerRpxm7K+I9PbUssFPZtysQlPopQApBqMSJvBw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEF733o+SC4K67ONFEgFnEsMnKwEPhUM+T3yIekz9lYkrNf9mWh712CHb1OqveyjDcg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "490ff291-497a-4b9c-9f3d-bc1218f328e5",
+                            SecurityStamp = "109a9938-6ab4-47c0-8770-c8d7010e986c",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
@@ -411,9 +413,6 @@ namespace mpsPlatform.Infrastructure.Migrations
                     b.Property<DateTime>("DateOfCounter")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
                     b.Property<int>("MonochromeA3")
                         .HasColumnType("int");
 
@@ -436,7 +435,6 @@ namespace mpsPlatform.Infrastructure.Migrations
                             ColorA3 = 4670,
                             ColorA4 = 336300,
                             DateOfCounter = new DateTime(2022, 8, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
                             MonochromeA3 = 900,
                             MonochromeA4 = 95000,
                             SerialNumberId = 1
@@ -447,7 +445,6 @@ namespace mpsPlatform.Infrastructure.Migrations
                             ColorA3 = 390,
                             ColorA4 = 35800,
                             DateOfCounter = new DateTime(2022, 8, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
                             MonochromeA3 = 10,
                             MonochromeA4 = 4700,
                             SerialNumberId = 2
@@ -458,7 +455,6 @@ namespace mpsPlatform.Infrastructure.Migrations
                             ColorA3 = 0,
                             ColorA4 = 0,
                             DateOfCounter = new DateTime(2022, 8, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
                             MonochromeA3 = 0,
                             MonochromeA4 = 58400,
                             SerialNumberId = 3
@@ -469,7 +465,6 @@ namespace mpsPlatform.Infrastructure.Migrations
                             ColorA3 = 0,
                             ColorA4 = 0,
                             DateOfCounter = new DateTime(2022, 9, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
                             MonochromeA3 = 0,
                             MonochromeA4 = 94700,
                             SerialNumberId = 4
@@ -480,7 +475,6 @@ namespace mpsPlatform.Infrastructure.Migrations
                             ColorA3 = 0,
                             ColorA4 = 0,
                             DateOfCounter = new DateTime(2022, 9, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
                             MonochromeA3 = 0,
                             MonochromeA4 = 232100,
                             SerialNumberId = 5
@@ -491,7 +485,6 @@ namespace mpsPlatform.Infrastructure.Migrations
                             ColorA3 = 0,
                             ColorA4 = 0,
                             DateOfCounter = new DateTime(2022, 7, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsDeleted = false,
                             MonochromeA3 = 0,
                             MonochromeA4 = 137200,
                             SerialNumberId = 6
