@@ -22,7 +22,7 @@ namespace mpsPlatform.Infrastructure.Data
         public DbSet<ЕquipmentModel> ЕquipmentModels { get; set; } = null!;
         public DbSet<SparePart> SpareParts { get; set; } = null!;
         public DbSet<SparePartModel> SparePartsModels { get; set; } = null!;
-        public DbSet<Мanifacturer> Мanifacturers { get; set; } = null!;
+        public DbSet<Manufacturer> Manufacturers { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -50,7 +50,7 @@ namespace mpsPlatform.Infrastructure.Data
                        
 
             modelBuilder.ApplyConfiguration(new UserConfiguration());
-            modelBuilder.ApplyConfiguration(new МanifacturerConfiguration());
+            modelBuilder.ApplyConfiguration(new ManufacturerConfiguration());
             modelBuilder.ApplyConfiguration(new ЕquipmentModelConfiguration());
             modelBuilder.ApplyConfiguration(new SparePartConfiguration());
             modelBuilder.ApplyConfiguration(new SparePartModelConfiguration());

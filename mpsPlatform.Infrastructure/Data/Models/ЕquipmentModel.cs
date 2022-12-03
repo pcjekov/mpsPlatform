@@ -34,9 +34,9 @@ namespace mpsPlatform.Infrastructure.Data.Models
         public EquipmentType EquimpentType { get; set; }
 
         [Required]
-        [ForeignKey(nameof(Мanifacturer))]
-        public int МanifacturerId { get; set; }
-        public Мanifacturer Мanifacturer { get; set; } = null!;
+        [ForeignKey(nameof(Manufacturer))]
+        public int ManufacturerId { get; set; }
+        public Manufacturer Manufacturer { get; set; } = null!;
 
         public List<SerialNumber> SerialNumbers{ get; set; }
 

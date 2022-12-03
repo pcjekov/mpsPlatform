@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using mpsPlatform.Core.Contracts;
 using mpsPlatform.Core.Models;
-using mpsPlatform.Infrastructure.Data.Models;
-using System.Diagnostics;
 
 namespace mpsPlatform.Controllers
 {
@@ -19,15 +17,17 @@ namespace mpsPlatform.Controllers
         public async Task<IActionResult> All([FromQuery]EquipmentFilterModel filters)
         {
             var result = await equipmentService.GetAllAsync(
-                                                filters.ManifacturerName,
+                                                filters.ManufacturerName,
                                                 filters.EquipmentModelName,
                                                 filters.CustomerName,
-                                                filters.ContractNumber);
+                                                filters.ContractNumber,
+                                                filters.DateOfCounter);
 
-            filters.AllМanifacturers = await equipmentService.AllМanifacturersNames();
+            filters.AllManufacturers = await equipmentService.AllManufacturersNames();
             filters.AllEquipmentsModels = await equipmentService.AllEquipmentsModelsNames();
             filters.AllCustomersNames = await equipmentService.AllCustomersNames();
             filters.AllContractsNumbers = await equipmentService.AllContractsNumbers();
+            filters.AllDatesOfCounters = await equipmentService.AllDatesOfCounters();
 
             filters.Equipments = result;
 

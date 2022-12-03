@@ -28,7 +28,7 @@ namespace mpsPlatform.Infrastructure.Data.Configuration
                     PartNumber = "B610V_DN",
                     MaxPaperType = MaxPaperType.A4,
                     EquimpentType = EquipmentType.BW,
-                    МanifacturerId = 1,
+                    ManufacturerId = 1,
                 },
                 new ЕquipmentModel
                 {
@@ -37,7 +37,7 @@ namespace mpsPlatform.Infrastructure.Data.Configuration
                     PartNumber = "B405V_DN",
                     MaxPaperType = MaxPaperType.A4,
                     EquimpentType = EquipmentType.BW,
-                    МanifacturerId = 1,
+                    ManufacturerId = 1,
                 },
                 new ЕquipmentModel
                 {
@@ -46,7 +46,7 @@ namespace mpsPlatform.Infrastructure.Data.Configuration
                     PartNumber = "C8001V_T_097S04830",
                     MaxPaperType = MaxPaperType.A3,
                     EquimpentType = EquipmentType.Col,
-                    МanifacturerId = 1,
+                    ManufacturerId = 1,
                 },
                 new ЕquipmentModel
                 {
@@ -55,7 +55,7 @@ namespace mpsPlatform.Infrastructure.Data.Configuration
                     PartNumber = "C8102V_F_097S05045",
                     MaxPaperType = MaxPaperType.A3,
                     EquimpentType = EquipmentType.Col,
-                    МanifacturerId = 1,
+                    ManufacturerId = 1,
                 },
 
                 new ЕquipmentModel
@@ -65,7 +65,7 @@ namespace mpsPlatform.Infrastructure.Data.Configuration
                     PartNumber = "K0Q21A",
                     MaxPaperType = MaxPaperType.A4,
                     EquimpentType = EquipmentType.BW,
-                    МanifacturerId = 2,
+                    ManufacturerId = 2,
                 },
 
                 new ЕquipmentModel
@@ -75,7 +75,7 @@ namespace mpsPlatform.Infrastructure.Data.Configuration
                     PartNumber = "B605V_DN",
                     MaxPaperType = MaxPaperType.A4,
                     EquimpentType = EquipmentType.BW,
-                    МanifacturerId = 1,
+                    ManufacturerId = 1,
                 }
             };
 

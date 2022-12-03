@@ -1,0 +1,16 @@
+﻿@using mpsPlatform.Core.Constants
+@{
+    ViewBag.Title = "Add Manufacturer";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+@if (!ViewData.ModelState.IsValid && TempData[MessageConstant.ErrorMessage] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData[MessageConstant.ErrorMessage]?.ToString()
+    </div>
+}
+
+<partial name="_AddManufacturerPartial" model="@Model" />

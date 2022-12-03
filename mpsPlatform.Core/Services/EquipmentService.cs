@@ -1,12 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using mpsPlatform.Core.Contracts;
 using mpsPlatform.Core.Models;
-using mpsPlatform.Infrastructure.Data;
 using mpsPlatform.Infrastructure.Data.Common;
 using mpsPlatform.Infrastructure.Data.Models;
 using mpsPlatform.Models;
-using System.Collections;
-using System.Globalization;
 
 namespace mpsPlatform.Core.Services
 {
@@ -14,29 +11,27 @@ namespace mpsPlatform.Core.Services
     {
         private readonly IRepository repo;
 
-        private readonly ApplicationDbContext context;
-
-        public EquipmentService(IRepository _repo, ApplicationDbContext _context)
+        public EquipmentService(IRepository _repo)
         {
             repo = _repo;
-            context = _context;
         }
 
         public async Task<IEnumerable<EquipmentServiceModel>> GetAllAsync(
-                                                            string? manifacturer,
+                                                            string? manufacturer,
                                                             string? equipmentModel,
                                                             string? customerName,
-                                                            string? contractNumber)
+                                                            string? contractNumber,
+                                                            DateTime? dateOfCounter)
                                                             
         {
             var result = new EquipmentFilterModel();
 
             var equipments = repo.AllReadonly<SerialNumber>();
 
-            if (string.IsNullOrEmpty(manifacturer) == false)
+            if (string.IsNullOrEmpty(manufacturer) == false)
             {
                 equipments = equipments
-                    .Where(x => x.ЕquipmentModel.Мanifacturer.Name == manifacturer);
+                    .Where(x => x.ЕquipmentModel.Manufacturer.Name == manufacturer);
             }
 
             if (string.IsNullOrEmpty(equipmentModel) == false)
@@ -57,43 +52,69 @@ namespace mpsPlatform.Core.Services
                              .Where(x => x.Contract.ContractNumber == contractNumber);
             }
 
-            result.Equipments = await equipments
-                .Select(x => new EquipmentServiceModel()
-                {
-                    Id = x.Id,
-                    ManifacturerName = x.ЕquipmentModel.Мanifacturer.Name,
-                    EquipmentModelName = x.ЕquipmentModel.Name,
-                    CustomerName = x.Contract.Customer.Name,
-                    ContractNumber = x.Contract.ContractNumber,
-                    LocationName = x.Location.EquimpentLocation,
-                    SerialNumber = x.ЕquipmentSerialNumber,
-                    Counter = x.Counters
-                               .Select(y => y.MonochromeA4)
-                               .OrderByDescending(y => y)
-                               .First(),
-                    Date = x.Counters
-                            .Select(y => y.DateOfCounter)
-                            .OrderByDescending(y => y)
-                            .First()
-                })
-                .ToListAsync();
-            
+            if (dateOfCounter != null)
+            {
+                result.Equipments = await equipments
+                    .Select(x => new EquipmentServiceModel()
+                    {
+                        Id = x.Id,
+                        ManufacturerName = x.ЕquipmentModel.Manufacturer.Name,
+                        EquipmentModelName = x.ЕquipmentModel.Name,
+                        CustomerName = x.Contract.Customer.Name,
+                        ContractNumber = x.Contract.ContractNumber,
+                        LocationName = x.Location.EquimpentLocation,
+                        SerialNumber = x.ЕquipmentSerialNumber,
+                        Counter = x.Counters
+                                   .Select(y => y.MonochromeA4)
+                                   .OrderByDescending(y => y)
+                                   .FirstOrDefault(),
+                        Date = x.Counters
+                                .Select(y => y.DateOfCounter)
+                                .OrderByDescending(y => y)
+                                .First()
+                    })
+                    .ToListAsync();
+            }
+            else
+            {
+                result.Equipments = await equipments
+                    .Select(x => new EquipmentServiceModel()
+                    {
+                        Id = x.Id,
+                        ManufacturerName = x.ЕquipmentModel.Manufacturer.Name,
+                        EquipmentModelName = x.ЕquipmentModel.Name,
+                        CustomerName = x.Contract.Customer.Name,
+                        ContractNumber = x.Contract.ContractNumber,
+                        LocationName = x.Location.EquimpentLocation,
+                        SerialNumber = x.ЕquipmentSerialNumber,
+                        Counter = x.Counters
+                                   .Select(y => y.MonochromeA4)
+                                   .OrderByDescending(y => y)
+                                   .First(),
+                        Date = x.Counters
+                                .Select(y => y.DateOfCounter)
+                                .OrderByDescending(y => y)
+                                .First()
+                    })
+                    .ToListAsync();
+            }
+
             return result.Equipments;
             
         }
 
-        public async Task<IEnumerable<string>> AllМanifacturersNames()
+        public async Task<IEnumerable<string>> AllManufacturersNames()
         {
-            var allМanifacturersNames = new List<string>();
-            var manifacturers = repo.AllReadonly<Мanifacturer>();
+            var allManufacturersNames = new List<string>();
+            var manufacturers = repo.AllReadonly<Manufacturer>();
 
-            allМanifacturersNames = await manifacturers
+            allManufacturersNames = await manufacturers
                                           .Select(x => x.Name)
                                           .Distinct()
                                           .OrderBy(x => x)
                                           .ToListAsync();
 
-            return allМanifacturersNames;
+            return allManufacturersNames;
         }
 
         public async Task<IEnumerable<string>> AllEquipmentsModelsNames()
@@ -102,7 +123,7 @@ namespace mpsPlatform.Core.Services
             var equipmentsModels = repo.AllReadonly<ЕquipmentModel>();
 
             allEquipmentsModels = await equipmentsModels
-                                          .OrderBy(x => x.Мanifacturer.Name)
+                                          .OrderBy(x => x.Manufacturer.Name)
                                           .ThenBy(x => x.Name)
                                           .Select(x => x.Name)
                                           .ToListAsync();
@@ -136,6 +157,20 @@ namespace mpsPlatform.Core.Services
                                           .ToListAsync();
 
             return allContractsNumbers;
+        }
+
+        public async Task<IEnumerable<DateTime>> AllDatesOfCounters()
+        {
+            var allDatesOfCounters = new List<DateTime>();
+            var dates = repo.AllReadonly<Counter>();
+
+            allDatesOfCounters = await dates
+                                          .Select(x => x.DateOfCounter)
+                                          .Distinct()
+                                          .OrderBy(x => x)
+                                          .ToListAsync();
+
+            return allDatesOfCounters;
         }
     }
 }

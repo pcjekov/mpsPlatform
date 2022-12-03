@@ -3,7 +3,7 @@
 <table class="table table-striped">
 	<thead>
 		<tr>
-			<td>Manifacturer</td>
+			<td>Manufacturer</td>
 			<td>Equipment Model</td>
 			<td>Customer</td>
 			<td>Contract Number</td>
@@ -17,13 +17,13 @@
 		@foreach (var item in Model)
 		{
 			<tr>
-				<td>@item.ManifacturerName</td>
+				<td>@item.ManufacturerName</td>
 				<td>@item.EquipmentModelName</td>
 				<td>@item.CustomerName</td>
 				<td>@item.ContractNumber</td>
 				<td>@item.LocationName</td>
 				<td>@item.SerialNumber</td>
-				<td>@item.Date</td>
+				<td>@item.Date.ToString("d")</td>
 				<td>@item.Counter</td>
 			</tr>
 		}

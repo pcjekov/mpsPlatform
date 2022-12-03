@@ -9,31 +9,31 @@ using System.Threading.Tasks;
 
 namespace mpsPlatform.Infrastructure.Data.Configuration
 {
-    internal class МanifacturerConfiguration : IEntityTypeConfiguration<Мanifacturer>
+    internal class ManufacturerConfiguration : IEntityTypeConfiguration<Manufacturer>
     {
-        public void Configure(EntityTypeBuilder<Мanifacturer> builder)
+        public void Configure(EntityTypeBuilder<Manufacturer> builder)
         {
-            builder.HasData(CreateМanifacturers());
+            builder.HasData(CreateManufacturers());
         }
 
-        private List<Мanifacturer> CreateМanifacturers()
+        private List<Manufacturer> CreateManufacturers()
         {
-            List<Мanifacturer> manifacturers = new List<Мanifacturer>()
+            List<Manufacturer> manufacturers = new List<Manufacturer>()
             {
-                new Мanifacturer()
+                new Manufacturer()
                 {
                     Id = 1,
                     Name = "Xerox"
                 },
 
-                new Мanifacturer()
+                new Manufacturer()
                 {
                     Id = 2,
                     Name = "HP"
                 }
             };
 
-            return manifacturers;
+            return manufacturers;
         }
     }
 }

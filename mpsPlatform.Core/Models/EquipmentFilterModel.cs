@@ -5,8 +5,8 @@ namespace mpsPlatform.Core.Models
 {
     public class EquipmentFilterModel
     {
-        [Display(Name = "Manifacturer")]
-        public string? ManifacturerName { get; set; }
+        [Display(Name = "Manufacturer")]
+        public string? ManufacturerName { get; set; }
 
         [Display(Name = "Model")]
         public string? EquipmentModelName { get; set; }
@@ -17,15 +17,20 @@ namespace mpsPlatform.Core.Models
         [Display(Name = "Contract")]
         public string? ContractNumber { get; set; }
 
+        [Display(Name = "Date")]
+        public DateTime? DateOfCounter { get; set; }
+
         public IEnumerable<EquipmentServiceModel> Equipments{ get; set; } = Enumerable.Empty<EquipmentServiceModel>();
 
-        public IEnumerable<string> AllМanifacturers { get; set; } = Enumerable.Empty<string>();
+        public IEnumerable<string> AllManufacturers { get; set; } = Enumerable.Empty<string>();
 
         public IEnumerable<string> AllEquipmentsModels { get; set; } = Enumerable.Empty<string>();
 
         public IEnumerable<string> AllCustomersNames { get; set; } = Enumerable.Empty<string>();
 
         public IEnumerable<string> AllContractsNumbers { get; set; } = Enumerable.Empty<string>();
+
+        public IEnumerable<DateTime> AllDatesOfCounters { get; set; } = Enumerable.Empty<DateTime>();
 
     }
 }

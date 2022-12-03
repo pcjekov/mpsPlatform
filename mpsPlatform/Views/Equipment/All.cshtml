@@ -10,12 +10,12 @@
 <form method="get">
 	<div class="row mb-4">
 		<div class="col-md-2">
-			<label asp-for="ManifacturerName"></label>
-			<select asp-for="ManifacturerName" class="form-control">
+			<label asp-for="ManufacturerName"></label>
+			<select asp-for="ManufacturerName" class="form-control">
 				<option value="">All</option>
-				@foreach (var manifacturer in Model.AllМanifacturers)
+				@foreach (var manufacturer in Model.AllManufacturers)
 				{
-					<option value="@manifacturer">@manifacturer</option>
+					<option value="@manufacturer">@manufacturer</option>
 				}
 			</select>
 		</div>
@@ -53,7 +53,18 @@
 			</select>
 		</div>
 
-		<div class="col-md-4 mt-auto d-flex justify-content-begin">
+		<div class="col-md-2">
+			<label asp-for="DateOfCounter"></label>
+			<select asp-for="DateOfCounter" class="form-control">
+				<option value="">All</option>
+				@foreach (var date in Model.AllDatesOfCounters)
+				{
+					<option value="@date">@date.ToString("d")</option>
+				}
+			</select>
+		</div>
+
+		<div class="col-md-2 mt-auto d-flex justify-content-end">
 			<input type="submit" value="Search" class="btn btn-primary" />
 		</div>
 	</div>

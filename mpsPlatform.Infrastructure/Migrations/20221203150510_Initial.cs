@@ -10,19 +10,6 @@ namespace mpsPlatform.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Мanifacturers",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Мanifacturers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
                 {
@@ -88,6 +75,19 @@ namespace mpsPlatform.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Manufacturers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Manufacturers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "SpareParts",
                 columns: table => new
                 {
@@ -100,30 +100,6 @@ namespace mpsPlatform.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SpareParts", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ЕquipmentModels",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    PartNumber = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    ImageUrl = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
-                    MaxPaperType = table.Column<int>(type: "int", nullable: false),
-                    EquimpentType = table.Column<int>(type: "int", nullable: false),
-                    МanifacturerId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ЕquipmentModels", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ЕquipmentModels_Мanifacturers_МanifacturerId",
-                        column: x => x.МanifacturerId,
-                        principalTable: "Мanifacturers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -273,25 +249,25 @@ namespace mpsPlatform.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SparePartsModels",
+                name: "ЕquipmentModels",
                 columns: table => new
                 {
-                    SparePartId = table.Column<int>(type: "int", nullable: false),
-                    ЕquipmentModelId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    PartNumber = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
+                    MaxPaperType = table.Column<int>(type: "int", nullable: false),
+                    EquimpentType = table.Column<int>(type: "int", nullable: false),
+                    ManufacturerId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SparePartsModels", x => new { x.SparePartId, x.ЕquipmentModelId });
+                    table.PrimaryKey("PK_ЕquipmentModels", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SparePartsModels_ЕquipmentModels_ЕquipmentModelId",
-                        column: x => x.ЕquipmentModelId,
-                        principalTable: "ЕquipmentModels",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_SparePartsModels_SpareParts_SparePartId",
-                        column: x => x.SparePartId,
-                        principalTable: "SpareParts",
+                        name: "FK_ЕquipmentModels_Manufacturers_ManufacturerId",
+                        column: x => x.ManufacturerId,
+                        principalTable: "Manufacturers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -333,6 +309,30 @@ namespace mpsPlatform.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "SparePartsModels",
+                columns: table => new
+                {
+                    SparePartId = table.Column<int>(type: "int", nullable: false),
+                    ЕquipmentModelId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SparePartsModels", x => new { x.SparePartId, x.ЕquipmentModelId });
+                    table.ForeignKey(
+                        name: "FK_SparePartsModels_ЕquipmentModels_ЕquipmentModelId",
+                        column: x => x.ЕquipmentModelId,
+                        principalTable: "ЕquipmentModels",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_SparePartsModels_SpareParts_SparePartId",
+                        column: x => x.SparePartId,
+                        principalTable: "SpareParts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Counters",
                 columns: table => new
                 {
@@ -359,7 +359,7 @@ namespace mpsPlatform.Infrastructure.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "dea12856-c198-4129-b3f3-b893d8395082", 0, "8004c4aa-2a54-4ebb-a212-a53b4a9b7d78", "admin@mpsPlatform.com", false, false, null, "admin@mpsplatform.com", "ADMIN", "AQAAAAEAACcQAAAAEIF/QsO0AvqdOukAAC6alkPn8Vc9MW6W2WEuaIr5FXRGorT2LHTGTLH0cW5Lv41dNg==", null, false, "6cac2cd5-533f-4fb2-8e2a-80c2a73c8c10", false, "admin" });
+                values: new object[] { "dea12856-c198-4129-b3f3-b893d8395082", 0, "740560d3-c595-4fb8-8bcc-d1623c07fcf0", "admin@mpsPlatform.com", false, false, null, "admin@mpsplatform.com", "ADMIN", "AQAAAAEAACcQAAAAENtI4RTB6BbhZ0usbNXhTyO4qv44tclvnsyIHQMtNVpSQ/kfRMMsMaTmf7r/TsYv0w==", null, false, "216cb4ba-d031-4ac7-87a2-2bfb3a84f1ac", false, "admin" });
 
             migrationBuilder.InsertData(
                 table: "Customers",
@@ -368,6 +368,15 @@ namespace mpsPlatform.Infrastructure.Migrations
                 {
                     { 1, "Metal Construct PLC" },
                     { 2, "Ring Ltd" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Manufacturers",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Xerox" },
+                    { 2, "HP" }
                 });
 
             migrationBuilder.InsertData(
@@ -389,15 +398,6 @@ namespace mpsPlatform.Infrastructure.Migrations
                     { 12, "drum", "013R00681", 180000 },
                     { 13, "cartridge", "106R03585", 37000 },
                     { 14, "drum", "101R00554", 24000 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Мanifacturers",
-                columns: new[] { "Id", "Name" },
-                values: new object[,]
-                {
-                    { 1, "Xerox" },
-                    { 2, "HP" }
                 });
 
             migrationBuilder.InsertData(
@@ -425,15 +425,15 @@ namespace mpsPlatform.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "ЕquipmentModels",
-                columns: new[] { "Id", "EquimpentType", "ImageUrl", "MaxPaperType", "Name", "PartNumber", "МanifacturerId" },
+                columns: new[] { "Id", "EquimpentType", "ImageUrl", "ManufacturerId", "MaxPaperType", "Name", "PartNumber" },
                 values: new object[,]
                 {
-                    { 1, 0, null, 0, "VersaLink B610dn", "B610V_DN", 1 },
-                    { 2, 0, null, 0, "VersaLink B405", "B405V_DN", 1 },
-                    { 3, 1, null, 1, "AltaLink C8035", "C8001V_T_097S04830", 1 },
-                    { 4, 1, null, 1, "AltaLink C8155", "C8102V_F_097S05045", 1 },
-                    { 5, 0, null, 0, "LaserJet M609dn", "K0Q21A", 2 },
-                    { 6, 0, null, 0, "VersaLink B605", "B605V_DN", 1 }
+                    { 1, 0, null, 1, 0, "VersaLink B610dn", "B610V_DN" },
+                    { 2, 0, null, 1, 0, "VersaLink B405", "B405V_DN" },
+                    { 3, 1, null, 1, 1, "AltaLink C8035", "C8001V_T_097S04830" },
+                    { 4, 1, null, 1, 1, "AltaLink C8155", "C8102V_F_097S05045" },
+                    { 5, 0, null, 2, 0, "LaserJet M609dn", "K0Q21A" },
+                    { 6, 0, null, 1, 0, "VersaLink B605", "B605V_DN" }
                 });
 
             migrationBuilder.InsertData(
@@ -484,9 +484,9 @@ namespace mpsPlatform.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ЕquipmentModels_МanifacturerId",
+                name: "IX_ЕquipmentModels_ManufacturerId",
                 table: "ЕquipmentModels",
-                column: "МanifacturerId");
+                column: "ManufacturerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -611,7 +611,7 @@ namespace mpsPlatform.Infrastructure.Migrations
                 name: "Locations");
 
             migrationBuilder.DropTable(
-                name: "Мanifacturers");
+                name: "Manufacturers");
 
             migrationBuilder.DropTable(
                 name: "Customers");

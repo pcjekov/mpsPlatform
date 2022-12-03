@@ -5,14 +5,16 @@ namespace mpsPlatform.Core.Contracts
     public interface IEquipmentService
     {
         Task<IEnumerable<EquipmentServiceModel>> GetAllAsync(
-                                                string? manifacturer,
+                                                string? manufacturer,
                                                 string? equipmentModel,
                                                 string? customerName,
-                                                string? contractNumber);
+                                                string? contractNumber,
+                                                DateTime? dateOfCounter);
 
-        Task<IEnumerable<string>> AllМanifacturersNames();
+        Task<IEnumerable<string>> AllManufacturersNames();
         Task<IEnumerable<string>> AllEquipmentsModelsNames();
         Task<IEnumerable<string>> AllCustomersNames();
         Task<IEnumerable<string>> AllContractsNumbers();
+        Task<IEnumerable<DateTime>> AllDatesOfCounters();
     }
 }

@@ -3,9 +3,9 @@ using System.Diagnostics;
 
 namespace mpsPlatform.Infrastructure.Data.Models
 {
-    public class Мanifacturer
+    public class Manufacturer
     {
-        public Мanifacturer()
+        public Manufacturer()
         {
             ЕquipmentModels = new List<ЕquipmentModel>();
         }

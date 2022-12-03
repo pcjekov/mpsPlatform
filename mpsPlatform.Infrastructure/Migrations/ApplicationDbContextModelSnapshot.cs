@@ -143,15 +143,15 @@ namespace mpsPlatform.Infrastructure.Migrations
                         {
                             Id = "dea12856-c198-4129-b3f3-b893d8395082",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8004c4aa-2a54-4ebb-a212-a53b4a9b7d78",
+                            ConcurrencyStamp = "740560d3-c595-4fb8-8bcc-d1623c07fcf0",
                             Email = "admin@mpsPlatform.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@mpsplatform.com",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIF/QsO0AvqdOukAAC6alkPn8Vc9MW6W2WEuaIr5FXRGorT2LHTGTLH0cW5Lv41dNg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENtI4RTB6BbhZ0usbNXhTyO4qv44tclvnsyIHQMtNVpSQ/kfRMMsMaTmf7r/TsYv0w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6cac2cd5-533f-4fb2-8e2a-80c2a73c8c10",
+                            SecurityStamp = "216cb4ba-d031-4ac7-87a2-2bfb3a84f1ac",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
@@ -257,6 +257,9 @@ namespace mpsPlatform.Infrastructure.Migrations
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
 
+                    b.Property<int>("ManufacturerId")
+                        .HasColumnType("int");
+
                     b.Property<int>("MaxPaperType")
                         .HasColumnType("int");
 
@@ -270,12 +273,9 @@ namespace mpsPlatform.Infrastructure.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<int>("МanifacturerId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("МanifacturerId");
+                    b.HasIndex("ManufacturerId");
 
                     b.ToTable("ЕquipmentModels");
 
@@ -284,85 +284,55 @@ namespace mpsPlatform.Infrastructure.Migrations
                         {
                             Id = 1,
                             EquimpentType = 0,
+                            ManufacturerId = 1,
                             MaxPaperType = 0,
                             Name = "VersaLink B610dn",
-                            PartNumber = "B610V_DN",
-                            МanifacturerId = 1
+                            PartNumber = "B610V_DN"
                         },
                         new
                         {
                             Id = 2,
                             EquimpentType = 0,
+                            ManufacturerId = 1,
                             MaxPaperType = 0,
                             Name = "VersaLink B405",
-                            PartNumber = "B405V_DN",
-                            МanifacturerId = 1
+                            PartNumber = "B405V_DN"
                         },
                         new
                         {
                             Id = 3,
                             EquimpentType = 1,
+                            ManufacturerId = 1,
                             MaxPaperType = 1,
                             Name = "AltaLink C8035",
-                            PartNumber = "C8001V_T_097S04830",
-                            МanifacturerId = 1
+                            PartNumber = "C8001V_T_097S04830"
                         },
                         new
                         {
                             Id = 4,
                             EquimpentType = 1,
+                            ManufacturerId = 1,
                             MaxPaperType = 1,
                             Name = "AltaLink C8155",
-                            PartNumber = "C8102V_F_097S05045",
-                            МanifacturerId = 1
+                            PartNumber = "C8102V_F_097S05045"
                         },
                         new
                         {
                             Id = 5,
                             EquimpentType = 0,
+                            ManufacturerId = 2,
                             MaxPaperType = 0,
                             Name = "LaserJet M609dn",
-                            PartNumber = "K0Q21A",
-                            МanifacturerId = 2
+                            PartNumber = "K0Q21A"
                         },
                         new
                         {
                             Id = 6,
                             EquimpentType = 0,
+                            ManufacturerId = 1,
                             MaxPaperType = 0,
                             Name = "VersaLink B605",
-                            PartNumber = "B605V_DN",
-                            МanifacturerId = 1
-                        });
-                });
-
-            modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.Мanifacturer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Мanifacturers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Xerox"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "HP"
+                            PartNumber = "B605V_DN"
                         });
                 });
 
@@ -610,6 +580,36 @@ namespace mpsPlatform.Infrastructure.Migrations
                             Id = 6,
                             CustomerId = 1,
                             EquimpentLocation = "Админ.сграда ет.1"
+                        });
+                });
+
+            modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.Manufacturer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Manufacturers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Xerox"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "HP"
                         });
                 });
 
@@ -1002,13 +1002,13 @@ namespace mpsPlatform.Infrastructure.Migrations
 
             modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.ЕquipmentModel", b =>
                 {
-                    b.HasOne("mpsPlatform.Infrastructure.Data.Models.Мanifacturer", "Мanifacturer")
+                    b.HasOne("mpsPlatform.Infrastructure.Data.Models.Manufacturer", "Manufacturer")
                         .WithMany("ЕquipmentModels")
-                        .HasForeignKey("МanifacturerId")
+                        .HasForeignKey("ManufacturerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Мanifacturer");
+                    b.Navigation("Manufacturer");
                 });
 
             modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.Contract", b =>
@@ -1097,11 +1097,6 @@ namespace mpsPlatform.Infrastructure.Migrations
                     b.Navigation("SparePartsModels");
                 });
 
-            modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.Мanifacturer", b =>
-                {
-                    b.Navigation("ЕquipmentModels");
-                });
-
             modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.Contract", b =>
                 {
                     b.Navigation("SerialNumbers");
@@ -1117,6 +1112,11 @@ namespace mpsPlatform.Infrastructure.Migrations
             modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.Location", b =>
                 {
                     b.Navigation("SerialNumbers");
+                });
+
+            modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.Manufacturer", b =>
+                {
+                    b.Navigation("ЕquipmentModels");
                 });
 
             modelBuilder.Entity("mpsPlatform.Infrastructure.Data.Models.SerialNumber", b =>

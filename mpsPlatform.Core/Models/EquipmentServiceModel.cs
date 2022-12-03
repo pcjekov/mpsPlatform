@@ -7,7 +7,7 @@ namespace mpsPlatform.Models
     {
         public int Id { get; set; }
 
-        public string ManifacturerName { get; set; } = null!;
+        public string ManufacturerName { get; set; } = null!;
 
         public string EquipmentModelName { get; set; } = null!;
 
@@ -19,10 +19,7 @@ namespace mpsPlatform.Models
         
         public string SerialNumber { get; set; } = null!;
 
-        //public IEnumerable<EquipmentServiceCounterDateModel> CountersDates { get; set; }
         public DateTime Date { get; set; }
-        ////public string Date { get; set; } = null!;
-
 
         public int Counter { get; set; }
 

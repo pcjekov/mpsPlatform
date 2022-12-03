@@ -1,0 +1,19 @@
+﻿@model ManufacturerListModel
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<td>Manufacturer</td>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model.Manufacturers)
+		{
+			<tr>
+				<td>@item.Name</td>
+			</tr>
+		}
+
+
+	</tbody>
+</table>
